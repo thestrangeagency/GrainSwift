@@ -13,6 +13,7 @@
 		A0EFACC9259F4D2300D11E03 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0EFACC8259F4D2300D11E03 /* Preview Assets.xcassets */; };
 		A0EFACD4259F4D2300D11E03 /* GrainSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACD3259F4D2300D11E03 /* GrainSwiftTests.swift */; };
 		A0EFACDF259F4D2300D11E03 /* GrainSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACDE259F4D2300D11E03 /* GrainSwiftUITests.swift */; };
+		A0EFACF9259F548E00D11E03 /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = A0EFACF8259F548E00D11E03 /* test.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		A0EFACDA259F4D2300D11E03 /* GrainSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrainSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0EFACDE259F4D2300D11E03 /* GrainSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainSwiftUITests.swift; sourceTree = "<group>"; };
 		A0EFACE0259F4D2300D11E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0EFACF8259F548E00D11E03 /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		A0EFACB5259F4D1A00D11E03 = {
 			isa = PBXGroup;
 			children = (
+				A0EFACF4259F546F00D11E03 /* Resources */,
 				A0EFACC0259F4D1A00D11E03 /* GrainSwift */,
 				A0EFACD2259F4D2300D11E03 /* GrainSwiftTests */,
 				A0EFACDD259F4D2300D11E03 /* GrainSwiftUITests */,
@@ -128,6 +131,14 @@
 				A0EFACE0259F4D2300D11E03 /* Info.plist */,
 			);
 			path = GrainSwiftUITests;
+			sourceTree = "<group>";
+		};
+		A0EFACF4259F546F00D11E03 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A0EFACF8259F548E00D11E03 /* test.wav */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0EFACF9259F548E00D11E03 /* test.wav in Resources */,
 				A0EFACC9259F4D2300D11E03 /* Preview Assets.xcassets in Resources */,
 				A0EFACC6259F4D2300D11E03 /* Assets.xcassets in Resources */,
 			);
