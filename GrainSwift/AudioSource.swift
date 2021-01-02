@@ -17,6 +17,7 @@ struct AudioSource {
             return nil
         }
 
+        // open audio file
         do {
             try audioFile = AVAudioFile(forReading: audioFileUrl)
             print("opened a file with sample rate: \(audioFile.fileFormat.sampleRate)")
@@ -29,6 +30,7 @@ struct AudioSource {
             return nil
         }
 
+        // read entire audio file into a buffer
         audioBuffer = optionalAudioBuffer
         do {
             try audioFile.read(into: audioBuffer)
