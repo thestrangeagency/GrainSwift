@@ -16,6 +16,7 @@
 		A0EFACF9259F548E00D11E03 /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = A0EFACF8259F548E00D11E03 /* test.wav */; };
 		A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACFD25A05C7000D11E03 /* AudioSource.swift */; };
 		A0EFAD1525A0712600D11E03 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFAD1425A0712600D11E03 /* Audio.swift */; };
+		A0EFAD1D25A0AEFA00D11E03 /* test - mono 16.wav in Resources */ = {isa = PBXBuildFile; fileRef = A0EFAD1C25A0AEFA00D11E03 /* test - mono 16.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		A0EFACF8259F548E00D11E03 /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
 		A0EFACFD25A05C7000D11E03 /* AudioSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSource.swift; sourceTree = "<group>"; };
 		A0EFAD1425A0712600D11E03 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		A0EFAD1C25A0AEFA00D11E03 /* test - mono 16.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "test - mono 16.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 		A0EFACF4259F546F00D11E03 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A0EFAD1C25A0AEFA00D11E03 /* test - mono 16.wav */,
 				A0EFACF8259F548E00D11E03 /* test.wav */,
 			);
 			path = Resources;
@@ -253,6 +256,7 @@
 				A0EFACF9259F548E00D11E03 /* test.wav in Resources */,
 				A0EFACC9259F4D2300D11E03 /* Preview Assets.xcassets in Resources */,
 				A0EFACC6259F4D2300D11E03 /* Assets.xcassets in Resources */,
+				A0EFAD1D25A0AEFA00D11E03 /* test - mono 16.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,14 +14,14 @@ struct AudioSource {
     var loaded:Bool = false
     
     init?() {
-        guard let audioFileUrl = Bundle.main.url(forResource: "test", withExtension: "wav") else {
+        guard let audioFileUrl = Bundle.main.url(forResource: "test - mono 16", withExtension: "wav") else {
             return nil
         }
 
         // open audio file
         do {
             try audioFile = AVAudioFile(forReading: audioFileUrl, commonFormat: .pcmFormatFloat32, interleaved: false)
-            print("opened a file with sample rate: \(audioFile.fileFormat.sampleRate)")
+            print("opened a file with sample rate: \(audioFile.fileFormat.sampleRate) channels: \(audioFile.fileFormat.channelCount)")
         } catch {
             print("error: could not open file for reading")
             return nil

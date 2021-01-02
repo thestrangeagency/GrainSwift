@@ -12,7 +12,7 @@ class Audio: ObservableObject {
     @Published var source = AudioSource()
     
     let engine = AVAudioEngine()
-    var bufferIndex:AVAudioFrameCount = 0;
+    var bufferIndex:AVAudioFrameCount = 0
     
     init() {
         let mainMixer = engine.mainMixerNode
@@ -23,17 +23,18 @@ class Audio: ObservableObject {
         let sourceNode = AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
             
             guard let audioBuffer = self.source?.audioBuffer,
-                  let channelData = audioBuffer.floatChannelData else {
+                  let sourceData = audioBuffer.floatChannelData else {
                 return noErr
             }
             
+            let sourceChannelMax = audioBuffer.stride - 1
             let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
-        
+
             for frame in 0..<Int(frameCount) {
                 
                 for channel in 0..<bufferListPointer.count {
                     let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
-                    outBuffer[frame] = channelData[channel][Int(self.bufferIndex)]
+                    outBuffer[frame] = sourceData[min(channel, sourceChannelMax)][Int(self.bufferIndex)]
                 }
                 
                 self.bufferIndex = (self.bufferIndex + 1) % audioBuffer.frameLength
