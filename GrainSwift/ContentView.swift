@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var audio: Audio
+    
     var body: some View {
-        Text("Hello, O World, O Earth!")
+        Text("Audio is \(audio.source?.loaded ?? false ? "loaded" : "not loaded")")
             .padding()
-            .onAppear {
-                
-            }
+            .environmentObject(audio)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(Audio())
     }
 }

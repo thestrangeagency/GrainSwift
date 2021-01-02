@@ -15,6 +15,7 @@
 		A0EFACDF259F4D2300D11E03 /* GrainSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACDE259F4D2300D11E03 /* GrainSwiftUITests.swift */; };
 		A0EFACF9259F548E00D11E03 /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = A0EFACF8259F548E00D11E03 /* test.wav */; };
 		A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACFD25A05C7000D11E03 /* AudioSource.swift */; };
+		A0EFAD1525A0712600D11E03 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFAD1425A0712600D11E03 /* Audio.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		A0EFACE0259F4D2300D11E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0EFACF8259F548E00D11E03 /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
 		A0EFACFD25A05C7000D11E03 /* AudioSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSource.swift; sourceTree = "<group>"; };
+		A0EFAD1425A0712600D11E03 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +81,8 @@
 		A0EFACB5259F4D1A00D11E03 = {
 			isa = PBXGroup;
 			children = (
-				A0EFACF4259F546F00D11E03 /* Resources */,
 				A0EFACC0259F4D1A00D11E03 /* GrainSwift */,
+				A0EFACF4259F546F00D11E03 /* Resources */,
 				A0EFACD2259F4D2300D11E03 /* GrainSwiftTests */,
 				A0EFACDD259F4D2300D11E03 /* GrainSwiftUITests */,
 				A0EFACBF259F4D1A00D11E03 /* Products */,
@@ -100,12 +102,13 @@
 		A0EFACC0259F4D1A00D11E03 /* GrainSwift */ = {
 			isa = PBXGroup;
 			children = (
+				A0EFAD1425A0712600D11E03 /* Audio.swift */,
+				A0EFACFD25A05C7000D11E03 /* AudioSource.swift */,
 				A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */,
 				A0EFACC3259F4D1A00D11E03 /* ContentView.swift */,
 				A0EFACC5259F4D2300D11E03 /* Assets.xcassets */,
 				A0EFACCA259F4D2300D11E03 /* Info.plist */,
 				A0EFACC7259F4D2300D11E03 /* Preview Content */,
-				A0EFACFD25A05C7000D11E03 /* AudioSource.swift */,
 			);
 			path = GrainSwift;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0EFAD1525A0712600D11E03 /* Audio.swift in Sources */,
 				A0EFACC4259F4D1A00D11E03 /* ContentView.swift in Sources */,
 				A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */,
 				A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */,

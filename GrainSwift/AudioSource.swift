@@ -11,6 +11,7 @@ import AVFoundation
 struct AudioSource {
     var audioFile: AVAudioFile;
     var audioBuffer: AVAudioPCMBuffer;
+    var loaded:Bool = false;
     
     init?() {
         guard let audioFileUrl = Bundle.main.url(forResource: "test", withExtension: "wav") else {
@@ -35,6 +36,7 @@ struct AudioSource {
         do {
             try audioFile.read(into: audioBuffer)
             print("read file into buffer")
+            loaded = true
         } catch {
             print("error: could not read file")
             return nil
