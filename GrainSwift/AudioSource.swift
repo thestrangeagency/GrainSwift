@@ -20,7 +20,7 @@ struct AudioSource {
 
         // open audio file
         do {
-            try audioFile = AVAudioFile(forReading: audioFileUrl)
+            try audioFile = AVAudioFile(forReading: audioFileUrl, commonFormat: .pcmFormatFloat32, interleaved: false)
             print("opened a file with sample rate: \(audioFile.fileFormat.sampleRate)")
         } catch {
             print("error: could not open file for reading")
