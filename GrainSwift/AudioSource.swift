@@ -13,27 +13,28 @@ struct AudioSource {
     var audioBuffer: AVAudioPCMBuffer;
     
     init?() {
-        if let audioFileUrl = Bundle.main.url(forResource: "test", withExtension: "wav") {
-            do {
-                try audioFile = AVAudioFile(forReading: audioFileUrl)
-                print("opened a file with sample rate: \(audioFile.fileFormat.sampleRate)")
-            } catch {
-                print("error: could not open file for reading")
-                return nil
-            }
-            if let audioBuffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat, frameCapacity: AVAudioFrameCount(audioFile.length)) {
-                self.audioBuffer = audioBuffer
-                do {
-                    try audioFile.read(into: self.audioBuffer)
-                    print("read file into buffer")
-                } catch {
-                    print("error: could not read file")
-                    return nil
-                }
-            } else {
-                return nil
-            }
-        } else {
+        guard let audioFileUrl = Bundle.main.url(forResource: "test", withExtension: "wav") else {
+            return nil
+        }
+
+        do {
+            try audioFile = AVAudioFile(forReading: audioFileUrl)
+            print("opened a file with sample rate: \(audioFile.fileFormat.sampleRate)")
+        } catch {
+            print("error: could not open file for reading")
+            return nil
+        }
+
+        guard let optionalAudioBuffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat, frameCapacity: AVAudioFrameCount(audioFile.length)) else {
+            return nil
+        }
+
+        audioBuffer = optionalAudioBuffer
+        do {
+            try audioFile.read(into: audioBuffer)
+            print("read file into buffer")
+        } catch {
+            print("error: could not read file")
             return nil
         }
     }
