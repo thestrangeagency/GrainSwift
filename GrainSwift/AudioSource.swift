@@ -9,9 +9,9 @@ import Foundation
 import AVFoundation
 
 struct AudioSource {
-    var audioFile: AVAudioFile;
-    var audioBuffer: AVAudioPCMBuffer;
-    var loaded:Bool = false;
+    var audioFile: AVAudioFile
+    var audioBuffer: AVAudioPCMBuffer
+    var loaded:Bool = false
     
     init?() {
         guard let audioFileUrl = Bundle.main.url(forResource: "test", withExtension: "wav") else {
