@@ -34,7 +34,7 @@ class Audio: ObservableObject {
                 
                 for channel in 0..<bufferListPointer.count {
                     let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
-                    outBuffer[frame] = sourceData[min(channel, sourceChannelMax)][Int(self.bufferIndex)]
+                    outBuffer[frame] = sourceData[max(channel, sourceChannelMax)][Int(self.bufferIndex)]
                 }
                 
                 self.bufferIndex = (self.bufferIndex + 1) % audioBuffer.frameLength
