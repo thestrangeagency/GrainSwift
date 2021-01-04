@@ -43,23 +43,19 @@ class Audio: ObservableObject {
         
         grainEngine = GrainEngine(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
         
-        if (grainEngine != nil) {
-            return AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
+        return AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
+            
+            let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
+            
+            for frame in 0..<Int(frameCount) {
+                let sample = self.grainEngine?.sample() ?? SIMD2<Float>(0.0, 0.0)
                 
-                let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
-                
-                for frame in 0..<Int(frameCount) {
-                    let sample = self.grainEngine!.sample()
-                    
-                    for channel in 0..<bufferListPointer.count {
-                        let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
-                        outBuffer[frame] = channel == 0 ? sample.x : sample.y
-                    }
+                for channel in 0..<bufferListPointer.count {
+                    let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
+                    outBuffer[frame] = channel == 0 ? sample.x : sample.y
                 }
-                return noErr
             }
-        } else {
-            return nil
+            return noErr
         }
     }
 
