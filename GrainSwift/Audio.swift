@@ -12,7 +12,6 @@ class Audio: ObservableObject {
     @Published var source = AudioSource()
     
     let engine = AVAudioEngine()
-    var bufferIndex:AVAudioFrameCount = 0
     
     init() {
         let mainMixer = engine.mainMixerNode
@@ -20,30 +19,11 @@ class Audio: ObservableObject {
         let outputFormat = output.inputFormat(forBus: 0)
         let inputFormat = source?.audioFile.processingFormat
    
-        let sourceNode = AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
-            
-            guard let audioBuffer = self.source?.audioBuffer,
-                  let sourceData = audioBuffer.floatChannelData else {
-                return noErr
-            }
-            
-            let sourceChannelMax = audioBuffer.stride - 1
-            let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
-
-            for frame in 0..<Int(frameCount) {
-                
-                for channel in 0..<bufferListPointer.count {
-                    let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
-                    outBuffer[frame] = sourceData[max(channel, sourceChannelMax)][Int(self.bufferIndex)]
-                }
-                
-                self.bufferIndex = (self.bufferIndex + 1) % audioBuffer.frameLength
-            }
-            return noErr
+        if let sourceNode = createGrainNode() {
+            engine.attach(sourceNode)
+            engine.connect(sourceNode, to: mainMixer, format: inputFormat)
         }
         
-        engine.attach(sourceNode)
-        engine.connect(sourceNode, to: mainMixer, format: inputFormat)
         engine.connect(mainMixer, to: output, format: outputFormat)
         
         do {
@@ -51,6 +31,30 @@ class Audio: ObservableObject {
             print("engine started")
         } catch {
             print("could not start engine: \(error)")
+        }
+    }
+    
+    func createGrainNode() -> AVAudioSourceNode? {
+        guard let audioBuffer = self.source?.audioBuffer,
+              let sourceData = audioBuffer.floatChannelData else {
+            return nil
+        }
+        
+        var grainEngine = GrainEngine(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
+        
+        return AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
+            
+            let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
+            
+            for frame in 0..<Int(frameCount) {
+                let sample = grainEngine.sample()
+                
+                for channel in 0..<bufferListPointer.count {
+                    let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
+                    outBuffer[frame] = channel == 0 ? sample.x : sample.y
+                }
+            }
+            return noErr
         }
     }
 }

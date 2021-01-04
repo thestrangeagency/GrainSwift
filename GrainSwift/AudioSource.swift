@@ -14,7 +14,7 @@ struct AudioSource {
     var loaded:Bool = false
     
     init?() {
-        guard let audioFileUrl = Bundle.main.url(forResource: "test - mono 16", withExtension: "wav") else {
+        guard let audioFileUrl = Bundle.main.url(forResource: "test", withExtension: "wav") else {
             return nil
         }
 

@@ -17,6 +17,7 @@
 		A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACFD25A05C7000D11E03 /* AudioSource.swift */; };
 		A0EFAD1525A0712600D11E03 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFAD1425A0712600D11E03 /* Audio.swift */; };
 		A0EFAD1D25A0AEFA00D11E03 /* test - mono 16.wav in Resources */ = {isa = PBXBuildFile; fileRef = A0EFAD1C25A0AEFA00D11E03 /* test - mono 16.wav */; };
+		A0EFAD2225A1C1A500D11E03 /* GrainEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFAD2125A1C1A500D11E03 /* GrainEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		A0EFACFD25A05C7000D11E03 /* AudioSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSource.swift; sourceTree = "<group>"; };
 		A0EFAD1425A0712600D11E03 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		A0EFAD1C25A0AEFA00D11E03 /* test - mono 16.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "test - mono 16.wav"; sourceTree = "<group>"; };
+		A0EFAD2125A1C1A500D11E03 /* GrainEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				A0EFAD1425A0712600D11E03 /* Audio.swift */,
 				A0EFACFD25A05C7000D11E03 /* AudioSource.swift */,
+				A0EFAD2125A1C1A500D11E03 /* GrainEngine.swift */,
 				A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */,
 				A0EFACC3259F4D1A00D11E03 /* ContentView.swift */,
 				A0EFACC5259F4D2300D11E03 /* Assets.xcassets */,
@@ -284,6 +287,7 @@
 				A0EFAD1525A0712600D11E03 /* Audio.swift in Sources */,
 				A0EFACC4259F4D1A00D11E03 /* ContentView.swift in Sources */,
 				A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */,
+				A0EFAD2225A1C1A500D11E03 /* GrainEngine.swift in Sources */,
 				A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
