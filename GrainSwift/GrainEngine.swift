@@ -37,7 +37,7 @@ struct Grain {
 }
 
 struct GrainEngine {
-    var grains:Array<Grain> = Array(repeating: Grain(), count: 20000)
+    var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 20000)
     var grainCount = 0
     var density = 0.1
     
@@ -62,14 +62,17 @@ struct GrainEngine {
             grainCount += 1
         }
         
-        var sample = SIMD2<Float>(0.0, 0.0)
         let amplitude = 1.0 / Float(grainCount)
         
         // iterate over grains and accumulate samples
-        for i in 0..<grainCount {
-            sample += grains[i].sample() * amplitude
+        let sample = grains.withUnsafeMutableBufferPointer { buffer -> SIMD2<Float> in
+            var result = SIMD2<Float>(0.0, 0.0)
+            for i in 0..<grainCount {
+                result += buffer[i].sample()
+            }
+            return result
         }
 
-        return sample
+        return sample * amplitude
     }
 }
