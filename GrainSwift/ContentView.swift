@@ -9,11 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var audio: Audio
+    @State var density = 0.0
     
     var body: some View {
-        Text("Audio is \(audio.source?.loaded ?? false ? "loaded" : "not loaded")")
+        VStack {
+            Text("Audio is \(audio.source?.loaded ?? false ? "loaded" : "not loaded")")
+                .padding()
+                .environmentObject(audio)
+            
+            Text("Density now at: \(density)")
+                .padding()
+            
+            Button(action: {
+                density = audio.increaseDensity()
+            }, label: {
+                Text("Denser Please")
+            })
             .padding()
-            .environmentObject(audio)
+            
+        }.onAppear(perform: {
+            density = audio.getDensity()
+        })
     }
 }
 

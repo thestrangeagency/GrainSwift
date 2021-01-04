@@ -37,16 +37,22 @@ struct Grain {
 }
 
 struct GrainEngine {
-    var grains:Array<Grain> = Array(repeating: Grain(), count: 2)
+    var grains:Array<Grain> = Array(repeating: Grain(), count: 20000)
     var grainCount = 0
-    let density = 1.0
+    var density = 0.1
     
     init(withBuffer buffer:UnsafePointer<UnsafeMutablePointer<Float>>, length: AVAudioFrameCount, channels: Int = 2) {
         Grain.buffer = buffer
         Grain.bufferLength = length
         Grain.bufferIndex = length / 2
         Grain.bufferMaxChannel = channels - 1
-        Grain.length = 4410 // arbitrary 0.1 seconds
+        Grain.length = 44100 // arbitrary 0.1 seconds
+    }
+    
+    mutating func increaseDensity() -> Double {
+        density += 0.1
+        density = min(density, 1.0)
+        return density
     }
     
     mutating func sample() -> SIMD2<Float> {

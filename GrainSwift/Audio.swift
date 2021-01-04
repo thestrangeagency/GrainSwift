@@ -12,6 +12,7 @@ class Audio: ObservableObject {
     @Published var source = AudioSource()
     
     let engine = AVAudioEngine()
+    var grainEngine: GrainEngine?
     
     init() {
         let mainMixer = engine.mainMixerNode
@@ -40,21 +41,33 @@ class Audio: ObservableObject {
             return nil
         }
         
-        var grainEngine = GrainEngine(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
+        grainEngine = GrainEngine(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
         
-        return AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
-            
-            let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
-            
-            for frame in 0..<Int(frameCount) {
-                let sample = grainEngine.sample()
+        if (grainEngine != nil) {
+            return AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
                 
-                for channel in 0..<bufferListPointer.count {
-                    let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
-                    outBuffer[frame] = channel == 0 ? sample.x : sample.y
+                let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
+                
+                for frame in 0..<Int(frameCount) {
+                    let sample = self.grainEngine!.sample()
+                    
+                    for channel in 0..<bufferListPointer.count {
+                        let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
+                        outBuffer[frame] = channel == 0 ? sample.x : sample.y
+                    }
                 }
+                return noErr
             }
-            return noErr
+        } else {
+            return nil
         }
+    }
+
+    func getDensity() -> Double {
+        return grainEngine?.density ?? 0.0
+    }
+    
+    func increaseDensity() -> Double {
+        return grainEngine?.increaseDensity() ?? 0.0
     }
 }
