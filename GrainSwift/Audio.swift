@@ -36,34 +36,18 @@ class Audio: ObservableObject {
     }
     
     func createGrainNode() -> AVAudioSourceNode? {
-        guard let audioBuffer = self.source?.audioBuffer,
-              let sourceData = audioBuffer.floatChannelData else {
+        guard let audioBuffer = self.source?.audioBuffer else {
             return nil
         }
         
-        grainEngine = GrainEngine(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
-        
-        return AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
-            
-            let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
-            
-            for frame in 0..<Int(frameCount) {
-                let sample = self.grainEngine?.sample() ?? SIMD2<Float>(0.0, 0.0)
-                
-                for channel in 0..<bufferListPointer.count {
-                    let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
-                    outBuffer[frame] = channel == 0 ? sample.x : sample.y
-                }
-            }
-            return noErr
-        }
+        return GrainSource.createSourceNode(with: audioBuffer, length: audioBuffer.frameLength)
     }
 
     func getDensity() -> Double {
-        return grainEngine?.density ?? 0.0
+        return GrainSource.getDensity()
     }
     
     func increaseDensity() -> Double {
-        return grainEngine?.increaseDensity() ?? 0.0
+        return GrainSource.increaseDensity()
     }
 }

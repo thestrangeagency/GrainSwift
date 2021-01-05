@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0C4EBE325A43FEC00631713 /* GrainSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EBE225A43FEC00631713 /* GrainSource.m */; };
 		A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */; };
 		A0EFACC4259F4D1A00D11E03 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACC3259F4D1A00D11E03 /* ContentView.swift */; };
 		A0EFACC6259F4D2300D11E03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0EFACC5259F4D2300D11E03 /* Assets.xcassets */; };
@@ -38,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0C4EBE125A43FEB00631713 /* GrainSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GrainSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		A0C4EBE225A43FEC00631713 /* GrainSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrainSource.m; sourceTree = "<group>"; };
+		A0C4EBE725A4420F00631713 /* GrainSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrainSource.h; sourceTree = "<group>"; };
 		A0EFACBE259F4D1A00D11E03 /* GrainSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrainSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainSwiftApp.swift; sourceTree = "<group>"; };
 		A0EFACC3259F4D1A00D11E03 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +118,9 @@
 				A0EFACC5259F4D2300D11E03 /* Assets.xcassets */,
 				A0EFACCA259F4D2300D11E03 /* Info.plist */,
 				A0EFACC7259F4D2300D11E03 /* Preview Content */,
+				A0C4EBE725A4420F00631713 /* GrainSource.h */,
+				A0C4EBE225A43FEC00631713 /* GrainSource.m */,
+				A0C4EBE125A43FEB00631713 /* GrainSwift-Bridging-Header.h */,
 			);
 			path = GrainSwift;
 			sourceTree = "<group>";
@@ -220,6 +227,7 @@
 				TargetAttributes = {
 					A0EFACBD259F4D1A00D11E03 = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 					A0EFACCE259F4D2300D11E03 = {
 						CreatedOnToolsVersion = 12.3;
@@ -284,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C4EBE325A43FEC00631713 /* GrainSource.m in Sources */,
 				A0EFAD1525A0712600D11E03 /* Audio.swift in Sources */,
 				A0EFACC4259F4D1A00D11E03 /* ContentView.swift in Sources */,
 				A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */,
@@ -445,6 +454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GrainSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 2DUR7JZP3J;
@@ -457,6 +467,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = agency.strange.the.GrainSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GrainSwift/GrainSwift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -467,6 +479,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GrainSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 2DUR7JZP3J;
@@ -479,6 +492,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = agency.strange.the.GrainSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GrainSwift/GrainSwift-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
