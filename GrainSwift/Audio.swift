@@ -44,12 +44,4 @@ class Audio: ObservableObject {
         grainEngine = GrainSource(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
         return grainEngine?.getSourceNode()
     }
-
-    func getDensity() -> Double {
-        return grainEngine?.getDensity() ?? 0.0
-    }
-    
-    func increaseDensity() -> Double {
-        return grainEngine?.increaseDensity() ?? 0.0
-    }
 }

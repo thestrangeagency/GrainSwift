@@ -21,14 +21,14 @@ struct ContentView: View {
                 .padding()
             
             Button(action: {
-                density = audio.increaseDensity()
+                density = audio.grainEngine?.increaseDensity() ?? 0.0
             }, label: {
                 Text("Denser Please")
             })
             .padding()
             
         }.onAppear(perform: {
-            density = audio.getDensity()
+            density = audio.grainEngine?.getDensity() ?? 0.0
         })
     }
 }
