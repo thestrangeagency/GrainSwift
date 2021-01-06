@@ -73,13 +73,19 @@ struct Grain {
             return SIMD2<Float>(0.0, 0.0)
         }
         
-        let grainIndex:Int = Int((Self.bufferIndex + offset) % Self.bufferLength)
+        // update with global parameters at start or loop
+        if offset == 0 {
+            length = Self.length
+            index = Self.bufferIndex
+        }
+        
+        let grainIndex:Int = Int((index + offset) % length)
         var sample = SIMD2<Float>(0.0, 0.0)
         
         sample.x = buffer[0][grainIndex]
         sample.y = buffer[max(0, Self.bufferMaxChannel)][grainIndex]
         
-        offset = (offset + 1) % Self.length
+        offset = (offset + 1) % length
 
         return sample
     }
