@@ -15,10 +15,23 @@ struct ContentView: View {
             Text("Audio is \(audio.source?.loaded ?? false ? "loaded" : "not loaded")")
                 .padding()
             
-            Text("\(audio.grainControl.density)")
+            Text("density: \(audio.grainControl.density)")
                 .padding()
             
-            Slider(value: $audio.grainControl.density, in: 0...1, step: 0.01)
+            Slider(value: $audio.grainControl.density, in: 0...1, step: 0.001)
+                .padding()
+            
+            Text("size: \(audio.grainControl.size)")
+                .padding()
+            
+            Slider(value: $audio.grainControl.size, in: 0...1, step: 0.001)
+                .padding()
+            
+            Text("position \(audio.grainControl.position)")
+                .padding()
+            
+            Slider(value: $audio.grainControl.position, in: 0...1, step: 0.001)
+                .padding()
         }
     }
 }

@@ -22,6 +22,28 @@ final class GrainControl : ObservableObject {
         }
     }
     
+    var size: Double {
+        get {
+            return Double(Grain.length) / Double(Grain.bufferLength)
+        }
+        set {
+            let newSize: AVAudioFrameCount = AVAudioFrameCount(newValue * Double(Grain.bufferLength))
+            Grain.length = clamp(newSize, minValue: 441, maxValue: Grain.bufferLength)
+            objectWillChange.send()
+        }
+    }
+    
+    var position: Double {
+        get {
+            return Double(Grain.bufferIndex) / Double(Grain.bufferLength)
+        }
+        set {
+            let newPosition: AVAudioFrameCount = AVAudioFrameCount(newValue * Double(Grain.bufferLength))
+            Grain.bufferIndex = clamp(newPosition, minValue: 0, maxValue: Grain.bufferLength-1)
+            objectWillChange.send()
+        }
+    }
+    
     init() {
         
     }
