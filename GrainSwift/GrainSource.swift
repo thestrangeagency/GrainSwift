@@ -50,16 +50,22 @@ final class GrainControl : ObservableObject {
 }
 
 struct Grain {
-    static var buffer: UnsafePointer<UnsafeMutablePointer<Float>>?
-    static var bufferLength: AVAudioFrameCount = 0
-    static var bufferIndex: AVAudioFrameCount = 0
-    static var bufferMaxChannel: Int = 1
-    static var length: AVAudioFrameCount = 0
+    // global grain parameters
+    static var buffer: UnsafePointer<UnsafeMutablePointer<Float>>?  // source buffer
     static var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 10_000)
-    static var grainCount = 0
-    static var density = 0.1
     
-    var index:UInt32 = 0
+    static var bufferLength: AVAudioFrameCount = 0  // source buffer length
+    static var bufferIndex: AVAudioFrameCount = 0   // position in source buffer
+    static var bufferMaxChannel: Int = 1            // 0 for mono, 1 for stereo
+    static var length: AVAudioFrameCount = 0        // length of the grains
+    
+    static var grainCount = 0   // number of grains playing
+    static var density = 0.1    // fraction of total count that should be playing
+    
+    // per grain state
+    var offset:UInt32 = 0   // current grain position relative to position in source buffer
+    var length:UInt32 = 0   // length of the grain
+    var index:UInt32 = 0    // position in source buffer
     
     mutating func sample() -> SIMD2<Float> {
 
@@ -67,13 +73,13 @@ struct Grain {
             return SIMD2<Float>(0.0, 0.0)
         }
         
-        let grainIndex:Int = Int((Self.bufferIndex + index) % Self.bufferLength)
+        let grainIndex:Int = Int((Self.bufferIndex + offset) % Self.bufferLength)
         var sample = SIMD2<Float>(0.0, 0.0)
         
         sample.x = buffer[0][grainIndex]
         sample.y = buffer[max(0, Self.bufferMaxChannel)][grainIndex]
         
-        index = (index + 1) % Self.length
+        offset = (offset + 1) % Self.length
 
         return sample
     }
