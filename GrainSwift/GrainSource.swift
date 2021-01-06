@@ -8,6 +8,24 @@
 import Foundation
 import simd
 import AVFoundation
+import SwiftUI
+
+final class GrainControl : ObservableObject {
+
+    var density: Double {
+        get {
+            return Grain.density
+        }
+        set {
+            Grain.density = clamp(newValue, minValue: 0.0, maxValue: 1.0)
+            objectWillChange.send()
+        }
+    }
+    
+    init() {
+        
+    }
+}
 
 struct Grain {
     static var buffer: UnsafePointer<UnsafeMutablePointer<Float>>?
@@ -15,7 +33,7 @@ struct Grain {
     static var bufferIndex: AVAudioFrameCount = 0
     static var bufferMaxChannel: Int = 1
     static var length: AVAudioFrameCount = 0
-    static var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 20000)
+    static var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 10_000)
     static var grainCount = 0
     static var density = 0.1
     
@@ -66,21 +84,13 @@ struct GrainSource {
         }
     }
     
-    func getDensity() -> Double {
-        return Grain.density
-    }
-    
-    func increaseDensity() -> Double {
-        Grain.density += 0.1
-        Grain.density = min(Grain.density, 1.0)
-        return Grain.density
-    }
-    
     func sample() -> SIMD2<Float> {
         
         // spawn a new grain if count is below density
         if Double(Grain.grainCount) < Grain.density * Double(Grain.grains.count) {
             Grain.grainCount += 1
+        } else {
+            Grain.grainCount = max(Grain.grainCount - 1, 0)
         }
         
         let amplitude = 1.0 / Float(Grain.grainCount)
