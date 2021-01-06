@@ -12,7 +12,7 @@ class Audio: ObservableObject {
     @Published var source = AudioSource()
     
     let engine = AVAudioEngine()
-    var grainEngine: GrainEngine?
+    var grainEngine: GrainSource?
     
     init() {
         let mainMixer = engine.mainMixerNode
@@ -41,26 +41,12 @@ class Audio: ObservableObject {
             return nil
         }
         
-        grainEngine = GrainEngine(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
-        
-        return AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
-            
-            let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
-            
-            for frame in 0..<Int(frameCount) {
-                let sample = self.grainEngine?.sample() ?? SIMD2<Float>(0.0, 0.0)
-                
-                for channel in 0..<bufferListPointer.count {
-                    let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
-                    outBuffer[frame] = channel == 0 ? sample.x : sample.y
-                }
-            }
-            return noErr
-        }
+        grainEngine = GrainSource(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
+        return grainEngine?.getSourceNode()
     }
 
     func getDensity() -> Double {
-        return grainEngine?.density ?? 0.0
+        return grainEngine?.getDensity() ?? 0.0
     }
     
     func increaseDensity() -> Double {

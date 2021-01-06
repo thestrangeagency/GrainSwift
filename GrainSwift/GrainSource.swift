@@ -15,6 +15,9 @@ struct Grain {
     static var bufferIndex: AVAudioFrameCount = 0
     static var bufferMaxChannel: Int = 1
     static var length: AVAudioFrameCount = 0
+    static var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 20000)
+    static var grainCount = 0
+    static var density = 0.1
     
     var index:UInt32 = 0
     
@@ -36,10 +39,7 @@ struct Grain {
     }
 }
 
-struct GrainEngine {
-    var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 20000)
-    var grainCount = 0
-    var density = 0.1
+struct GrainSource {
     
     init(withBuffer buffer:UnsafePointer<UnsafeMutablePointer<Float>>, length: AVAudioFrameCount, channels: Int = 2) {
         Grain.buffer = buffer
@@ -49,25 +49,46 @@ struct GrainEngine {
         Grain.length = 44100 // arbitrary 0.1 seconds
     }
     
-    mutating func increaseDensity() -> Double {
-        density += 0.1
-        density = min(density, 1.0)
-        return density
+    func getSourceNode() -> AVAudioSourceNode? {
+        return AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
+            
+            let bufferListPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
+            
+            for frame in 0..<Int(frameCount) {
+                let sample = self.sample()
+                
+                for channel in 0..<bufferListPointer.count {
+                    let outBuffer:UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(bufferListPointer[channel])
+                    outBuffer[frame] = channel == 0 ? sample.x : sample.y
+                }
+            }
+            return noErr
+        }
     }
     
-    mutating func sample() -> SIMD2<Float> {
+    func getDensity() -> Double {
+        return Grain.density
+    }
+    
+    func increaseDensity() -> Double {
+        Grain.density += 0.1
+        Grain.density = min(Grain.density, 1.0)
+        return Grain.density
+    }
+    
+    func sample() -> SIMD2<Float> {
         
         // spawn a new grain if count is below density
-        if Double(grainCount) < density * Double(grains.count) {
-            grainCount += 1
+        if Double(Grain.grainCount) < Grain.density * Double(Grain.grains.count) {
+            Grain.grainCount += 1
         }
         
-        let amplitude = 1.0 / Float(grainCount)
+        let amplitude = 1.0 / Float(Grain.grainCount)
         
         // iterate over grains and accumulate samples
-        let sample = grains.withUnsafeMutableBufferPointer { buffer -> SIMD2<Float> in
+        let sample = Grain.grains.withUnsafeMutableBufferPointer { buffer -> SIMD2<Float> in
             var result = SIMD2<Float>(0.0, 0.0)
-            for i in 0..<grainCount {
+            for i in 0..<Grain.grainCount {
                 result += buffer[i].sample()
             }
             return result
