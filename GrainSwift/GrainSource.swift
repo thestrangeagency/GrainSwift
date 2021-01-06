@@ -11,6 +11,7 @@ import AVFoundation
 import SwiftUI
 
 final class GrainControl : ObservableObject {
+    let maxSize = 44100.0
 
     var density: Double {
         get {
@@ -24,11 +25,12 @@ final class GrainControl : ObservableObject {
     
     var size: Double {
         get {
-            return Double(Grain.length) / Double(Grain.bufferLength)
+            return Double(Grain.length) / maxSize
         }
         set {
-            let newSize: AVAudioFrameCount = AVAudioFrameCount(newValue * Double(Grain.bufferLength))
-            Grain.length = clamp(newSize, minValue: 441, maxValue: Grain.bufferLength)
+            let newSize: AVAudioFrameCount = AVAudioFrameCount(newValue * maxSize)
+            let maxSizeClamped = min(AVAudioFrameCount(maxSize), Grain.bufferLength)
+            Grain.length = clamp(newSize, minValue: 441, maxValue: maxSizeClamped)
             objectWillChange.send()
         }
     }
@@ -98,7 +100,7 @@ struct GrainSource {
         Grain.bufferLength = length
         Grain.bufferIndex = length / 2
         Grain.bufferMaxChannel = channels - 1
-        Grain.length = 44100 // arbitrary 0.1 seconds
+        Grain.length = 4410 // arbitrary 0.1 seconds
     }
     
     func getSourceNode() -> AVAudioSourceNode? {
