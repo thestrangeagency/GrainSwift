@@ -12,7 +12,6 @@ import SwiftUI
 
 final class GrainControl : ObservableObject {
     let maxSize = 44100.0
-    var maxRamp:Double
     
     var density: Double {
         get {
@@ -59,6 +58,12 @@ final class GrainControl : ObservableObject {
         }
     }
     
+    var maxRamp: Double {
+        get {
+            return Double(Grain.length) * 0.5
+        }
+    }
+    
     var ramp: Double {
         get {
             return Double(Grain.ramp) / maxRamp
@@ -72,7 +77,6 @@ final class GrainControl : ObservableObject {
     }
     
     init() {
-        self.maxRamp = maxSize * 0.5
     }
 }
 
