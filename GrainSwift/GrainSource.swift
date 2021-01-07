@@ -46,6 +46,18 @@ final class GrainControl : ObservableObject {
         }
     }
     
+    var spread: Double {
+        get {
+            return Double(Grain.delay) / maxSize
+        }
+        set {
+            let newSize: AVAudioFrameCount = AVAudioFrameCount(newValue * maxSize)
+            let maxSizeClamped = min(AVAudioFrameCount(maxSize), Grain.bufferLength)
+            Grain.delay = clamp(newSize, minValue: 441, maxValue: maxSizeClamped)
+            objectWillChange.send()
+        }
+    }
+    
     init() {
         
     }
@@ -60,6 +72,7 @@ struct Grain {
     static var bufferIndex: AVAudioFrameCount = 0   // position in source buffer
     static var bufferMaxChannel: Int = 1            // 0 for mono, 1 for stereo
     static var length: AVAudioFrameCount = 0        // length of the grains
+    static var delay: AVAudioFrameCount = 0        // delay between grains
     
     static var grainCount = 0   // number of grains playing
     static var density = 0.1    // fraction of total count that should be playing
@@ -68,6 +81,7 @@ struct Grain {
     var offset:UInt32 = 0   // current grain position relative to position in source buffer
     var length:UInt32 = 0   // length of the grain
     var index:UInt32 = 0    // position in source buffer
+    var delay:UInt32 = 0    // delay between loops
     
     mutating func sample() -> SIMD2<Float> {
 
@@ -79,15 +93,25 @@ struct Grain {
         if offset == 0 {
             length = Self.length
             index = Self.bufferIndex
+            delay = UInt32.random(in: 0..<Self.delay)
         }
         
         let grainIndex:Int = Int((index + offset) % length)
         var sample = SIMD2<Float>(0.0, 0.0)
         
-        sample.x = buffer[0][grainIndex]
-        sample.y = buffer[max(0, Self.bufferMaxChannel)][grainIndex]
+        if delay > 0 {
+            
+            // delay phase for grain variation returns silence
+            delay = delay - 1
         
-        offset = (offset + 1) % length
+        } else {
+        
+            // populate sample from source buffer
+            sample.x = buffer[0][grainIndex]
+            sample.y = buffer[max(0, Self.bufferMaxChannel)][grainIndex]
+        }
+        
+        offset = (offset + 1) % (length + delay)
 
         return sample
     }
@@ -101,6 +125,7 @@ struct GrainSource {
         Grain.bufferIndex = length / 2
         Grain.bufferMaxChannel = channels - 1
         Grain.length = 4410 // arbitrary 0.1 seconds
+        Grain.delay = 4410
     }
     
     func getSourceNode() -> AVAudioSourceNode? {

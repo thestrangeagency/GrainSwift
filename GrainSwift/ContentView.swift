@@ -18,6 +18,7 @@ struct ContentView: View {
             ControlSliderView(name: "density", value: $audio.grainControl.density)
             ControlSliderView(name: "size", value: $audio.grainControl.size)
             ControlSliderView(name: "position", value: $audio.grainControl.position)
+            ControlSliderView(name: "spread", value: $audio.grainControl.spread)
         }
     }
 }
