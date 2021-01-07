@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A0C4EBFC25A5B6EC00631713 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EBFB25A5B6EC00631713 /* Utils.swift */; };
+		A0C4EC0425A73A2800631713 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EC0325A73A2800631713 /* WaveView.swift */; };
 		A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */; };
 		A0EFACC4259F4D1A00D11E03 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACC3259F4D1A00D11E03 /* ContentView.swift */; };
 		A0EFACC6259F4D2300D11E03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0EFACC5259F4D2300D11E03 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		A0C4EBFB25A5B6EC00631713 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A0C4EC0325A73A2800631713 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		A0EFACBE259F4D1A00D11E03 /* GrainSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrainSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainSwiftApp.swift; sourceTree = "<group>"; };
 		A0EFACC3259F4D1A00D11E03 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */,
 				A0EFACC3259F4D1A00D11E03 /* ContentView.swift */,
 				A0C4EBFB25A5B6EC00631713 /* Utils.swift */,
+				A0C4EC0325A73A2800631713 /* WaveView.swift */,
 				A0EFACC5259F4D2300D11E03 /* Assets.xcassets */,
 				A0EFACCA259F4D2300D11E03 /* Info.plist */,
 				A0EFACC7259F4D2300D11E03 /* Preview Content */,
@@ -289,6 +292,7 @@
 			files = (
 				A0EFAD1525A0712600D11E03 /* Audio.swift in Sources */,
 				A0EFACC4259F4D1A00D11E03 /* ContentView.swift in Sources */,
+				A0C4EC0425A73A2800631713 /* WaveView.swift in Sources */,
 				A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */,
 				A0EFAD2225A1C1A500D11E03 /* GrainSource.swift in Sources */,
 				A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */,
