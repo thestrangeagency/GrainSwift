@@ -19,6 +19,7 @@ struct ContentView: View {
             ControlSliderView(name: "size", value: $audio.grainControl.size)
             ControlSliderView(name: "position", value: $audio.grainControl.position)
             ControlSliderView(name: "spread", value: $audio.grainControl.spread)
+            ControlSliderView(name: "ramp", value: $audio.grainControl.ramp)
         }
     }
 }
@@ -30,7 +31,6 @@ struct ControlSliderView: View {
     var body: some View {
         VStack {
             Text("\(name): \(value)")
-                .padding()
             
             Slider(value: $value, in: 0...1, step: 0.001)
                 .padding()
