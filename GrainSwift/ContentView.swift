@@ -15,22 +15,23 @@ struct ContentView: View {
             Text("Audio is \(audio.source?.loaded ?? false ? "loaded" : "not loaded")")
                 .padding()
             
-            Text("density: \(audio.grainControl.density)")
+            ControlSliderView(name: "density", value: $audio.grainControl.density)
+            ControlSliderView(name: "size", value: $audio.grainControl.size)
+            ControlSliderView(name: "position", value: $audio.grainControl.position)
+        }
+    }
+}
+
+struct ControlSliderView: View {
+    let name: String
+    @Binding var value: Double
+    
+    var body: some View {
+        VStack {
+            Text("\(name): \(value)")
                 .padding()
             
-            Slider(value: $audio.grainControl.density, in: 0...1, step: 0.001)
-                .padding()
-            
-            Text("size: \(audio.grainControl.size)")
-                .padding()
-            
-            Slider(value: $audio.grainControl.size, in: 0...1, step: 0.001)
-                .padding()
-            
-            Text("position \(audio.grainControl.position)")
-                .padding()
-            
-            Slider(value: $audio.grainControl.position, in: 0...1, step: 0.001)
+            Slider(value: $value, in: 0...1, step: 0.001)
                 .padding()
         }
     }
