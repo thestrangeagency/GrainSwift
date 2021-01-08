@@ -31,6 +31,7 @@ final class GrainControl : ObservableObject {
             let newSize: AVAudioFrameCount = AVAudioFrameCount(newValue * maxSize)
             let maxSizeClamped = min(AVAudioFrameCount(maxSize), Grain.bufferLength)
             Grain.length = clamp(newSize, minValue: 441, maxValue: maxSizeClamped)
+            Grain.ramp = min(Grain.ramp, AVAudioFrameCount(maxRamp))
             objectWillChange.send()
         }
     }
