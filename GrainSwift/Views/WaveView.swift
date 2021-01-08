@@ -11,7 +11,7 @@ import AVFoundation
 struct WaveView: View {
     let buffer: AVAudioPCMBuffer
     let start: UInt32
-    let end: UInt32?
+    let end: UInt32
     let position: Double
     
     var body: some View {
@@ -23,7 +23,7 @@ struct WaveView: View {
                         
                         let width = geometry.size.width
                         let halfHeight = Int(geometry.size.height / 2.0)
-                        let stride = CGFloat(end ?? start - start) / width
+                        let stride = CGFloat(end - start) / width
                         
                         for x in 0..<Int(width) {
                             path.move(to: CGPoint(x: x, y: halfHeight))

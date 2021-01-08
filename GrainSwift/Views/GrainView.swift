@@ -9,7 +9,8 @@ import SwiftUI
 
 struct GrainView: View {
     let position: Double
-    
+    let size: Double
+
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -17,7 +18,7 @@ struct GrainView: View {
                     if let buffer = Grain.buffer {
                         let start = UInt32(Double(Grain.bufferLength) * position)
                         let end = start + Grain.length
-                        WaveView(buffer: buffer, start: start, end:end, position: -1.0)
+                        WaveView(buffer: buffer, start: start, end: end, position: -1.0)
                     }
                 }
             }
@@ -28,6 +29,6 @@ struct GrainView: View {
 
 struct GrainView_Previews: PreviewProvider {
     static var previews: some View {
-        GrainView(position: 0.0)
+        GrainView(position: 0.0, size: 0.0)
     }
 }

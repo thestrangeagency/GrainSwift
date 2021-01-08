@@ -17,7 +17,7 @@ struct ContentView: View {
             
             if let buffer = audio.source?.audioBuffer {
                 WaveView(buffer: buffer, start: 0, end: buffer.frameLength, position: audio.grainControl.position)
-                GrainView(position: audio.grainControl.position)
+                GrainView(position: audio.grainControl.position, size: audio.grainControl.size)
             }
             
             ControlSliderView(name: "density", value: $audio.grainControl.density)
