@@ -10,6 +10,8 @@ import AVFoundation
 
 struct WaveView: View {
     let buffer: AVAudioPCMBuffer
+    let start: UInt32
+    let end: UInt32?
     let position: Double
     
     var body: some View {
@@ -19,15 +21,15 @@ struct WaveView: View {
                 ZStack {
                     Path { path in
                         
-                        let width = Int(geometry.size.width)
+                        let width = geometry.size.width
                         let halfHeight = Int(geometry.size.height / 2.0)
-                        let stride = buffer.frameLength / UInt32(width)
+                        let stride = CGFloat(end ?? start - start) / width
                         
-                        for x in 0..<width {
+                        for x in 0..<Int(width) {
                             path.move(to: CGPoint(x: x, y: halfHeight))
                             
                             // TODO mono for now
-                            let sample = buffer.floatChannelData?[0][x * Int(stride)] ?? 0.0
+                            let sample = buffer.floatChannelData?[0][Int(start) + x * Int(stride)] ?? 0.0
                             let y = halfHeight + Int(sample * Float(halfHeight))
                             
                             path.addLine(to: CGPoint(x: x, y: y)
@@ -49,6 +51,6 @@ struct WaveView: View {
 
 struct WaveView_Previews: PreviewProvider {
     static var previews: some View {
-        return WaveView(buffer: AVAudioPCMBuffer(), position: 0.5)
+        return WaveView(buffer: AVAudioPCMBuffer(), start: 0, end: 0, position: 0.5)
     }
 }

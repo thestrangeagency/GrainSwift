@@ -82,7 +82,8 @@ final class GrainControl : ObservableObject {
 
 struct Grain {
     // global grain parameters
-    static var buffer: UnsafePointer<UnsafeMutablePointer<Float>>?  // source buffer
+    static var buffer: AVAudioPCMBuffer?                            // source buffer
+    static var data: UnsafePointer<UnsafeMutablePointer<Float>>?    // source buffer data
     static var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 10_000)
     
     static var bufferLength: AVAudioFrameCount = 0  // source buffer length
@@ -105,7 +106,7 @@ struct Grain {
     
     mutating func sample() -> SIMD2<Float> {
 
-        guard let buffer = Self.buffer else {
+        guard let data = Self.data else {
             return SIMD2<Float>(0.0, 0.0)
         }
         
@@ -127,8 +128,8 @@ struct Grain {
         
         } else {
             // populate sample from source buffer
-            sample.x = buffer[0][grainIndex]
-            sample.y = buffer[max(0, Self.bufferMaxChannel)][grainIndex]
+            sample.x = data[0][grainIndex]
+            sample.y = data[max(0, Self.bufferMaxChannel)][grainIndex]
             
             
             // calculate trapezoidal envelope
@@ -154,11 +155,12 @@ struct Grain {
 
 struct GrainSource {
     
-    init(withBuffer buffer:UnsafePointer<UnsafeMutablePointer<Float>>, length: AVAudioFrameCount, channels: Int = 2) {
+    init(withBuffer buffer:AVAudioPCMBuffer) {
         Grain.buffer = buffer
-        Grain.bufferLength = length
-        Grain.bufferIndex = length / 2
-        Grain.bufferMaxChannel = channels - 1
+        Grain.data = buffer.floatChannelData
+        Grain.bufferLength = buffer.frameLength
+        Grain.bufferIndex = buffer.frameLength / 2
+        Grain.bufferMaxChannel = buffer.stride - 1
         Grain.length = 4410 // arbitrary 0.1 seconds
         Grain.delay = Grain.length
         Grain.ramp = Grain.length / 6

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A0C4EBFC25A5B6EC00631713 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EBFB25A5B6EC00631713 /* Utils.swift */; };
 		A0C4EC0425A73A2800631713 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EC0325A73A2800631713 /* WaveView.swift */; };
+		A0C4EC0C25A83CA100631713 /* GrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EC0B25A83CA100631713 /* GrainView.swift */; };
 		A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */; };
 		A0EFACC4259F4D1A00D11E03 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFACC3259F4D1A00D11E03 /* ContentView.swift */; };
 		A0EFACC6259F4D2300D11E03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0EFACC5259F4D2300D11E03 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		A0C4EBFB25A5B6EC00631713 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A0C4EC0325A73A2800631713 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
+		A0C4EC0B25A83CA100631713 /* GrainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainView.swift; sourceTree = "<group>"; };
 		A0EFACBE259F4D1A00D11E03 /* GrainSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrainSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainSwiftApp.swift; sourceTree = "<group>"; };
 		A0EFACC3259F4D1A00D11E03 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +88,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0C4EC1025A83CB200631713 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A0EFACC3259F4D1A00D11E03 /* ContentView.swift */,
+				A0C4EC0B25A83CA100631713 /* GrainView.swift */,
+				A0C4EC0325A73A2800631713 /* WaveView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A0EFACB5259F4D1A00D11E03 = {
 			isa = PBXGroup;
 			children = (
@@ -110,13 +122,12 @@
 		A0EFACC0259F4D1A00D11E03 /* GrainSwift */ = {
 			isa = PBXGroup;
 			children = (
+				A0C4EC1025A83CB200631713 /* Views */,
 				A0EFAD1425A0712600D11E03 /* Audio.swift */,
 				A0EFACFD25A05C7000D11E03 /* AudioSource.swift */,
 				A0EFAD2125A1C1A500D11E03 /* GrainSource.swift */,
 				A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */,
-				A0EFACC3259F4D1A00D11E03 /* ContentView.swift */,
 				A0C4EBFB25A5B6EC00631713 /* Utils.swift */,
-				A0C4EC0325A73A2800631713 /* WaveView.swift */,
 				A0EFACC5259F4D2300D11E03 /* Assets.xcassets */,
 				A0EFACCA259F4D2300D11E03 /* Info.plist */,
 				A0EFACC7259F4D2300D11E03 /* Preview Content */,
@@ -296,6 +307,7 @@
 				A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */,
 				A0EFAD2225A1C1A500D11E03 /* GrainSource.swift in Sources */,
 				A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */,
+				A0C4EC0C25A83CA100631713 /* GrainView.swift in Sources */,
 				A0C4EBFC25A5B6EC00631713 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

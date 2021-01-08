@@ -46,12 +46,11 @@ class Audio: ObservableObject {
     }
     
     func createGrainNode() -> AVAudioSourceNode? {
-        guard let audioBuffer = self.source?.audioBuffer,
-              let sourceData = audioBuffer.floatChannelData else {
+        guard let audioBuffer = self.source?.audioBuffer else {
             return nil
         }
         
-        grainEngine = GrainSource(withBuffer: sourceData, length: audioBuffer.frameLength, channels: audioBuffer.stride)
+        grainEngine = GrainSource(withBuffer: audioBuffer)
         return grainEngine?.getSourceNode()
     }
 }
