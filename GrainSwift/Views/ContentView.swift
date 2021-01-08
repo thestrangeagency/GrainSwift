@@ -15,6 +15,11 @@ struct ContentView: View {
             Text("Audio is \(audio.source?.loaded ?? false ? "loaded" : "not loaded")")
                 .padding()
             
+            if let buffer = audio.source?.audioBuffer {
+                WaveView(buffer: buffer, position: audio.grainControl.position)
+                GrainView(position: audio.grainControl.position, size: audio.grainControl.size, ramp: audio.grainControl.ramp)
+            }
+            
             ControlSliderView(name: "density", value: $audio.grainControl.density)
             ControlSliderView(name: "size", value: $audio.grainControl.size)
             ControlSliderView(name: "position", value: $audio.grainControl.position)
