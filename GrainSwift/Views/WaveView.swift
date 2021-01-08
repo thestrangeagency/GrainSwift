@@ -9,10 +9,21 @@ import SwiftUI
 import AVFoundation
 
 struct WaveView: View {
-    let buffer: AVAudioPCMBuffer
-    let start: UInt32
-    let end: UInt32
-    let position: Double
+    var buffer: AVAudioPCMBuffer
+    var start: UInt32
+    var end: UInt32
+    var position: Double
+    
+    init(buffer: AVAudioPCMBuffer, start: UInt32, end: UInt32, position: Double = -1.0) {
+        self.start = start
+        self.end = end
+        self.buffer = buffer
+        self.position = position
+    }
+    
+    init(buffer: AVAudioPCMBuffer, position: Double) {
+        self.init(buffer: buffer, start: 0, end: buffer.frameLength, position: position)
+    }
     
     var body: some View {
         ZStack {
@@ -54,6 +65,6 @@ struct WaveView: View {
 
 struct WaveView_Previews: PreviewProvider {
     static var previews: some View {
-        return WaveView(buffer: AVAudioPCMBuffer(), start: 0, end: 0, position: 0.5)
+        return WaveView(buffer: AVAudioPCMBuffer(), position: 0.5)
     }
 }

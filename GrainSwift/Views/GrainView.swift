@@ -19,7 +19,7 @@ struct GrainView: View {
                     if let buffer = Grain.buffer {
                         let start = UInt32(Double(Grain.bufferLength) * position)
                         let end = start + Grain.length
-                        WaveView(buffer: buffer, start: start, end: end, position: -1.0)
+                        WaveView(buffer: buffer, start: start, end: end)
                     }
                     Path { path in
                         let halfWidth = CGFloat(geometry.size.width * 0.5)
