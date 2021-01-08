@@ -28,9 +28,12 @@ struct WaveView: View {
                         for x in 0..<Int(width) {
                             path.move(to: CGPoint(x: x, y: halfHeight))
                             
-                            // TODO mono for now
-                            let sample = buffer.floatChannelData?[0][Int(start) + x * Int(stride)] ?? 0.0
-                            let y = halfHeight + Int(sample * Float(halfHeight))
+                            let channels = buffer.stride
+                            var sample:Float = 0.0
+                            for i in 0..<channels {
+                                sample += buffer.floatChannelData?[i][Int(start) + x * Int(stride)] ?? 0.0
+                            }
+                            let y = halfHeight + Int(sample * Float(halfHeight) / Float(channels))
                             
                             path.addLine(to: CGPoint(x: x, y: y)
                             )
