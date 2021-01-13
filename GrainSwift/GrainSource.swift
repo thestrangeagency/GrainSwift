@@ -119,7 +119,7 @@ struct Grain {
             ramp = Self.ramp
         }
         
-        let grainIndex:Int = Int((index + offset) % length)
+        let grainIndex:Int = Int((index + offset) % Self.bufferLength)
         var sample = SIMD2<Float>(0.0, 0.0)
         
         if delay > 0 {
