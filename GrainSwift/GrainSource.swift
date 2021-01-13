@@ -18,7 +18,7 @@ final class GrainControl : ObservableObject {
             return Grain.density
         }
         set {
-            Grain.density = clamp(newValue, minValue: 0.0, maxValue: 1.0)
+            Grain.density = clamp(newValue, minValue: 0.01, maxValue: 1.0)
             objectWillChange.send()
         }
     }
@@ -85,7 +85,7 @@ struct Grain {
     // global grain parameters
     static var buffer: AVAudioPCMBuffer?                            // source buffer
     static var data: UnsafePointer<UnsafeMutablePointer<Float>>?    // source buffer data
-    static var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 10_000)
+    static var grains:ContiguousArray<Grain> = ContiguousArray(repeating: Grain(), count: 2_000)
     
     static var bufferLength: AVAudioFrameCount = 0  // source buffer length
     static var bufferIndex: AVAudioFrameCount = 0   // position in source buffer
