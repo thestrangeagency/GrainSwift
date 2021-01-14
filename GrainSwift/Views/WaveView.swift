@@ -42,7 +42,7 @@ struct WaveView: View {
                             let channels = buffer.stride
                             var sample:Float = 0.0
                             for i in 0..<channels {
-                                sample += buffer.floatChannelData?[i][Int(start) + x * Int(stride)] ?? 0.0
+                                sample += buffer.floatChannelData?[i][(Int(start) + x * Int(stride)) % Int(buffer.frameLength)] ?? 0.0
                             }
                             let y = halfHeight + Int(sample * Float(halfHeight) / Float(channels))
                             
