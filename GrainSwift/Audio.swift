@@ -13,30 +13,23 @@ class Audio: ObservableObject {
     @Published var source = AudioSource()
     
     let engine = AVAudioEngine()
-    var grainEngine: GrainSource?
     
+    var grainSource: GrainSource?
     var grainControl = GrainControl()
     var grainControlCancellable: AnyCancellable? = nil
+    var sourceNode: AVAudioSourceNode?
     
     init() {
-        
         // bubble nested Observable changes
         grainControlCancellable = grainControl.objectWillChange.sink { (_) in
             self.objectWillChange.send()
         }
-        
-        let mainMixer = engine.mainMixerNode
-        let output = engine.outputNode
-        let outputFormat = output.inputFormat(forBus: 0)
-        let inputFormat = source?.audioFile.processingFormat
-   
-        if let sourceNode = createGrainNode() {
-            engine.attach(sourceNode)
-            engine.connect(sourceNode, to: mainMixer, format: inputFormat)
-        }
-        
-        engine.connect(mainMixer, to: output, format: outputFormat)
-        
+
+        initGrainSource()
+        startEngine()
+    }
+    
+    func startEngine() {
         do {
             try engine.start()
             print("engine started")
@@ -45,12 +38,40 @@ class Audio: ObservableObject {
         }
     }
     
+    func initGrainSource() {
+        if let sourceNode = createGrainNode() {
+            self.sourceNode = sourceNode
+            let mainMixer = engine.mainMixerNode
+            let inputFormat = source?.audioFile!.processingFormat
+
+            engine.attach(sourceNode)
+            engine.connect(sourceNode, to: mainMixer, format: inputFormat)
+        }
+    }
+    
     func createGrainNode() -> AVAudioSourceNode? {
         guard let audioBuffer = self.source?.audioBuffer else {
             return nil
         }
         
-        grainEngine = GrainSource(withBuffer: audioBuffer)
-        return grainEngine?.getSourceNode()
+        grainSource = GrainSource(withBuffer: audioBuffer)
+        return grainSource?.getSourceNode()
+    }
+    
+    func loadFileFrom(_ audioFileUrl: URL) {
+        engine.stop()
+        
+        if var source = self.source, source.loadFileFrom(audioFileUrl) {
+            
+            // disconnect previous grain source node
+            if let sourceNode = self.sourceNode {
+                engine.disconnectNodeOutput(sourceNode)
+                engine.detach(sourceNode)
+            }
+            
+            // reinit grain source and start audio engine
+            initGrainSource()
+            startEngine()
+        }
     }
 }

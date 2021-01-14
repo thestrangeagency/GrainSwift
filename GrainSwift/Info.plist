@@ -46,5 +46,27 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeIconFiles</key>
+            <array>
+                <string>icon_64.png</string>
+                <string>icon_320.png</string>
+            </array>
+            <key>CFBundleTypeName</key>
+            <string>Audio</string>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>LSHandlerRank</key>
+            <string>Owner</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>com.microsoft.waveform-​audio</string>
+                <string>com.apple.coreaudio-​format</string>
+                <string>public.audio</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

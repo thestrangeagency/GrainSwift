@@ -15,6 +15,9 @@ struct GrainSwiftApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(audio)
+                .onOpenURL { url in
+                    audio.loadFileFrom(url)
+                }
         }
     }
 }
