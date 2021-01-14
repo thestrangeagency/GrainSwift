@@ -61,7 +61,7 @@ class Audio: ObservableObject {
     func loadFileFrom(_ audioFileUrl: URL) {
         engine.stop()
         
-        if var source = self.source, source.loadFileFrom(audioFileUrl) {
+        if source!.loadFileFrom(audioFileUrl) {
             
             // disconnect previous grain source node
             if let sourceNode = self.sourceNode {
