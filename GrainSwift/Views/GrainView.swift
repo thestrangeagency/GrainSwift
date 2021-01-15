@@ -25,8 +25,19 @@ struct GrainView: View {
                         let startMax = start + Grain.indexJitter
                         let endMax = startMax + Grain.length + Grain.lengthJitter
                         ZStack {
-                            WaveView(buffer: buffer, start: start, end: end).opacity(0.5)
-                            WaveView(buffer: buffer, start: startMax, end: endMax).opacity(0.5)
+                            let steps = 10
+                            ForEach(0..<steps) { step in
+                                let perStep = 1.0 / Double(steps)
+                                
+                                // linterp unwrapped else compiler confused about types
+                                let progress = Double(step) * perStep
+                                let startProgress = Double(startMax - start) * progress
+                                let endProgress = Double(endMax - end) * progress
+                                let stepStart = start + UInt32(startProgress)
+                                let stepEnd = end + UInt32(endProgress)
+                                
+                                WaveView(buffer: buffer, start: stepStart, end: stepEnd).opacity(perStep)
+                            }
                         }
                     }
                     // draw ramp
