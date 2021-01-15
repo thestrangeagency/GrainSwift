@@ -12,8 +12,10 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Audio is \(audio.source?.loaded ?? false ? "loaded" : "not loaded")")
-                .padding()
+            if !(audio.source?.loaded ?? true) {
+                Text("Audio is not loaded")
+                    .padding()
+            }
             
             if let buffer = audio.source?.audioBuffer {
                 WaveView(buffer: buffer, position: audio.grainControl.position)

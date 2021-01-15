@@ -58,7 +58,6 @@ struct WaveView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.vertical)
     }
 }
 
