@@ -13,13 +13,27 @@ struct AudioSource {
     var audioBuffer: AVAudioPCMBuffer?
     var loaded:Bool = false
     
+    struct UserDefaultsKeys {
+        static let lastFileUrl = "lastFileUrl"
+    }
+
     init?() {
         guard let audioFileUrl = Bundle.main.url(forResource: "test", withExtension: "wav") else {
             return nil
         }
         
-        if !loadFileFrom(audioFileUrl) {
-            return nil
+        // attempt to load previous url but default to bundle url
+        if let previousUrl = UserDefaults.standard.url(forKey: UserDefaultsKeys.lastFileUrl) {
+            print("attempting to load previous url \(previousUrl)")
+            if !loadFileFrom(previousUrl) {
+                if !loadFileFrom(audioFileUrl) {
+                    return nil
+                }
+            }
+        } else {
+            if !loadFileFrom(audioFileUrl) {
+                return nil
+            }
         }
     }
  
@@ -41,6 +55,22 @@ struct AudioSource {
             print("read file into buffer")
             self.audioBuffer = audioBuffer
             loaded = true
+            
+            // save a copy for next time
+            if let docsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let docFileUrl = docsUrl.appendingPathComponent("source.wav")
+                if audioFileUrl != docFileUrl {
+                    try? FileManager.default.removeItem(at: docFileUrl)
+                    do {
+                        try FileManager.default.copyItem(at: audioFileUrl, to: docFileUrl)
+                        print("saved a local copy of source file")
+                        UserDefaults.standard.set(docFileUrl, forKey: UserDefaultsKeys.lastFileUrl)
+                    } catch {
+                        print("error: failed to make a local copy of source file")
+                    }
+                }
+            }
+            
             return true
         } else {
             print("error: could not read file")
