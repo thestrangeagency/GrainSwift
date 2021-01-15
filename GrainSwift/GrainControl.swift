@@ -9,7 +9,7 @@ import AVFoundation
 
 final class GrainControl : ObservableObject {
     let maxSize = 44100.0
-    let maxJitter:UInt32 = 22050
+    let maxJitter:UInt32 = 11025
     
     var density: Double {
         get {
