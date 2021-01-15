@@ -26,12 +26,11 @@ struct ContentView: View {
             }
             
             ControlSliderView(name: "density", value: $audio.grainControl.density)
+            ControlTwinSliderView(name: "spread", valueOne: $audio.grainControl.spread, valueTwo: $audio.grainControl.spreadJitter)
+            ControlSliderView(name: "ramp", value: $audio.grainControl.ramp)
             
             ControlTwinSliderView(name: "size", valueOne: $audio.grainControl.size, valueTwo: $audio.grainControl.sizeJitter)
             ControlTwinSliderView(name: "position", valueOne: $audio.grainControl.position, valueTwo: $audio.grainControl.positionJitter)
-            ControlTwinSliderView(name: "spread", valueOne: $audio.grainControl.spread, valueTwo: $audio.grainControl.spreadJitter)
-            
-            ControlSliderView(name: "ramp", value: $audio.grainControl.ramp)
         }
     }
 }
