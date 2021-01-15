@@ -125,7 +125,7 @@ struct GrainSource {
             Grain.grainCount = max(Grain.grainCount - 1, 0)
         }
         
-        let amplitude = 1.0 / Float(Grain.grainCount)
+        let amplitude = 1.0 / sqrt(Float(Grain.grainCount))
         
         // iterate over grains and accumulate samples
         let sample = Grain.grains.withUnsafeMutableBufferPointer { buffer -> SIMD2<Float> in
