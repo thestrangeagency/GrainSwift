@@ -21,9 +21,11 @@ struct ContentView: View {
             }
             
             ControlSliderView(name: "density", value: $audio.grainControl.density)
-            ControlSliderView(name: "size", value: $audio.grainControl.size)
-            ControlSliderView(name: "position", value: $audio.grainControl.position)
-            ControlSliderView(name: "spread", value: $audio.grainControl.spread)
+            
+            ControlTwinSliderView(name: "size", valueOne: $audio.grainControl.size, valueTwo: $audio.grainControl.sizeJitter)
+            ControlTwinSliderView(name: "position", valueOne: $audio.grainControl.position, valueTwo: $audio.grainControl.positionJitter)
+            ControlTwinSliderView(name: "spread", valueOne: $audio.grainControl.spread, valueTwo: $audio.grainControl.spreadJitter)
+            
             ControlSliderView(name: "ramp", value: $audio.grainControl.ramp)
         }
     }
@@ -39,6 +41,25 @@ struct ControlSliderView: View {
             
             Slider(value: $value, in: 0...1, step: 0.001)
                 .padding()
+        }
+    }
+}
+
+struct ControlTwinSliderView: View {
+    let name: String
+    @Binding var valueOne: Double
+    @Binding var valueTwo: Double
+    
+    var body: some View {
+        VStack {
+            Text("\(name): \(valueOne) | \(valueTwo)")
+            
+            HStack {
+                Slider(value: $valueOne, in: 0...1, step: 0.001)
+                    .padding()
+                Slider(value: $valueTwo, in: 0...1, step: 0.001)
+                    .padding()
+            }
         }
     }
 }

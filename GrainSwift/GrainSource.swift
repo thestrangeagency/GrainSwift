@@ -23,6 +23,10 @@ struct Grain {
     static var delay: AVAudioFrameCount = 0         // delay between grains
     static var ramp: AVAudioFrameCount = 0          // length of attack and decay
     
+    static var lengthJitter:UInt32 = 0              // add randomness to parameters
+    static var indexJitter:UInt32 = 0
+    static var delayJitter:UInt32 = 0
+    
     static var grainCount = 0   // number of grains playing
     static var density = 0.1    // fraction of total count that should be playing
     
@@ -41,9 +45,9 @@ struct Grain {
         
         // update with global parameters at start or loop
         if offset == 0 {
-            length = Self.length
-            index = Self.bufferIndex
-            delay = UInt32.random(in: 0..<Self.delay)
+            length = Self.length + (Self.lengthJitter != 0 ? UInt32.random(in: 0..<Self.lengthJitter) : 0)
+            index = Self.bufferIndex + (Self.indexJitter != 0 ? UInt32.random(in: 0..<Self.indexJitter) : 0)
+            delay = Self.delay + (Self.delayJitter != 0 ? UInt32.random(in: 0..<Self.delayJitter) : 0)
             ramp = Self.ramp
         }
         
