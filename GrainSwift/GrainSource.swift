@@ -95,7 +95,7 @@ struct GrainSource {
         Grain.bufferIndex = buffer.frameLength / 2
         Grain.bufferMaxChannel = buffer.stride - 1
         Grain.length = 4410 // arbitrary 0.1 seconds
-        Grain.delay = Grain.length
+        Grain.delay = 0
         Grain.ramp = Grain.length / 6
     }
     
