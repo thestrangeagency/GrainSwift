@@ -27,7 +27,6 @@ struct WaveView: View {
     
     var body: some View {
         ZStack {
-            Color.init(hue: 0, saturation: 0, brightness: 0.95)
             GeometryReader { geometry in
                 ZStack {
                     Path { path in
