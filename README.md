@@ -4,7 +4,7 @@ Open source granular synthesizer for iOS, written in Swift using SwiftUI.
 
 ## Where we are
 
-![Screen Shot](iPhone.png)
+<img src="iPhone.png" width="200px">
 
 ## How we got here
 
