@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A05E662625AF3DAB000DED49 /* icon_64.png in Resources */ = {isa = PBXBuildFile; fileRef = A05E662425AF3DAB000DED49 /* icon_64.png */; };
-		A05E662725AF3DAB000DED49 /* icon_320.png in Resources */ = {isa = PBXBuildFile; fileRef = A05E662525AF3DAB000DED49 /* icon_320.png */; };
 		A05E662F25B196AA000DED49 /* GrainControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E662E25B196AA000DED49 /* GrainControl.swift */; };
 		A0C4EBFC25A5B6EC00631713 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EBFB25A5B6EC00631713 /* Utils.swift */; };
 		A0C4EC0425A73A2800631713 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EC0325A73A2800631713 /* WaveView.swift */; };
@@ -41,8 +39,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A05E662425AF3DAB000DED49 /* icon_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_64.png; sourceTree = "<group>"; };
-		A05E662525AF3DAB000DED49 /* icon_320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_320.png; sourceTree = "<group>"; };
 		A05E662E25B196AA000DED49 /* GrainControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainControl.swift; sourceTree = "<group>"; };
 		A0C4EBFB25A5B6EC00631713 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A0C4EC0325A73A2800631713 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
@@ -143,8 +139,6 @@
 		A0EFACF4259F546F00D11E03 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A05E662425AF3DAB000DED49 /* icon_64.png */,
-				A05E662525AF3DAB000DED49 /* icon_320.png */,
 				A0EFACF8259F548E00D11E03 /* test.wav */,
 			);
 			path = Resources;
@@ -253,8 +247,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A05E662625AF3DAB000DED49 /* icon_64.png in Resources */,
-				A05E662725AF3DAB000DED49 /* icon_320.png in Resources */,
 				A0EFACF9259F548E00D11E03 /* test.wav in Resources */,
 				A0EFACC9259F4D2300D11E03 /* Preview Assets.xcassets in Resources */,
 				A0EFACC6259F4D2300D11E03 /* Assets.xcassets in Resources */,

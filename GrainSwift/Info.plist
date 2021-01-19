@@ -7,11 +7,6 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array>
-				<string>icon_64.png</string>
-				<string>icon_320.png</string>
-			</array>
 			<key>CFBundleTypeName</key>
 			<string>Audio</string>
 			<key>CFBundleTypeRole</key>
