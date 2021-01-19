@@ -13,4 +13,5 @@ Open source granular synthesizer for iOS, written in Swift using SwiftUI.
 1. [Part 3](http://the.strange.agency/blog/open-grain-03/)
 1. [Part 4](http://the.strange.agency/blog/open-grain-04/)
 1. [Part 5](http://the.strange.agency/blog/open-grain-05/)
-
+1. [Part 6](http://the.strange.agency/blog/open-grain-06/)
+1. [Part 7](http://the.strange.agency/blog/open-grain-07/)
