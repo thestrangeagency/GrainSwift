@@ -45,9 +45,9 @@ struct Grain {
         
         // update with global parameters at start or loop
         if offset == 0 {
-            length = Self.length + (Self.lengthJitter != 0 ? UInt32.random(in: 0..<Self.lengthJitter) : 0)
-            index = Self.bufferIndex + (Self.indexJitter != 0 ? UInt32.random(in: 0..<Self.indexJitter) : 0)
-            delay = Self.delay + (Self.delayJitter != 0 ? UInt32.random(in: 0..<Self.delayJitter) : 0)
+            length = Self.length + UInt32.random(in: 0...Self.lengthJitter)
+            index = Self.bufferIndex + UInt32.random(in: 0...Self.indexJitter)
+            delay = Self.delay + UInt32.random(in: 0...Self.delayJitter)
             ramp = Self.ramp
         }
         
