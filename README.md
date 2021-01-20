@@ -4,16 +4,13 @@ Open source granular synthesizer for iOS, written in Swift using SwiftUI.
 
 ## Where we are
 
+<img src="Meta%20Assets/iPhone.png" width="200px" />
 
+## How to get one
 
-<div style="text-align: center; width: 200px">
+You can build from source or [install a copy](https://apps.apple.com/us/app/open-granular/id1549682361) directly from the App Store.
 
-<div><img src="Meta%20Assets/iPhone.png" width="200px" /></div>
-
-<div style="padding: 10px"><a href="https://apps.apple.com/us/app/open-granular/id1549682361">
-<img src="Meta%20Assets/AppStore.svg" width="100px" /></a></div>
-
-</div>
+<a href="https://apps.apple.com/us/app/open-granular/id1549682361"><img src="Meta%20Assets/AppStore.svg" width="100px" /></a>
 
 ## Why we are here
 
