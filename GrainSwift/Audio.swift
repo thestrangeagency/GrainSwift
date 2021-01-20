@@ -25,8 +25,23 @@ class Audio: ObservableObject {
             self.objectWillChange.send()
         }
 
+        startSession()
         initGrainSource()
         startEngine()
+    }
+    
+    func startSession() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+        } catch {
+            print("failed to set audio session category")
+        }
+        do {
+            try audioSession.setActive(true)
+        } catch let error as NSError {
+            print("error: unable to activate audio session:  \(error.localizedDescription)")
+        }
     }
     
     func startEngine() {
