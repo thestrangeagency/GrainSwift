@@ -2,11 +2,18 @@
 
 Open source granular synthesizer for iOS, written in Swift using SwiftUI.
 
-<a href="https://apps.apple.com/us/app/open-granular/id1549682361"><img src="Meta%20Assets/AppStore.svg" width="200px" /></a>
-
 ## Where we are
 
-<img src="Meta%20Assets/iPhone.png" width="200px" />
+
+
+<div style="text-align: center; width: 200px">
+
+<div><img src="Meta%20Assets/iPhone.png" width="200px" /></div>
+
+<div style="padding: 10px"><a href="https://apps.apple.com/us/app/open-granular/id1549682361">
+<img src="Meta%20Assets/AppStore.svg" width="100px" /></a></div>
+
+</div>
 
 ## Why we are here
 
@@ -25,4 +32,3 @@ I wanted to explore Swift in the context of audio and see how much I could get a
 ## How to load your own sounds
 
 You can share sounds from other applications, like Voice Memos. More details in [Part 5](http://the.strange.agency/blog/open-grain-05/).
-
