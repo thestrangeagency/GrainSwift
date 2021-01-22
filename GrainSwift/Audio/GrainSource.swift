@@ -30,6 +30,8 @@ struct Grain {
     static var grainCount = 0   // number of grains playing
     static var density = 0.1    // fraction of total count that should be playing
     
+    static var amp = ASREnvelope()
+    
     // per grain state
     var offset:UInt32 = 0   // current grain position relative to position in source buffer
     var length:UInt32 = 0   // length of the grain
@@ -94,9 +96,13 @@ struct GrainSource {
         Grain.bufferLength = buffer.frameLength
         Grain.bufferIndex = buffer.frameLength / 2
         Grain.bufferMaxChannel = buffer.stride - 1
-        Grain.length = 4410 // arbitrary 0.1 seconds
+        Grain.length = 4410
         Grain.delay = 0
         Grain.ramp = Grain.length / 6
+        
+        Grain.amp.attackTime = 4410
+        Grain.amp.releaseTime = 44100 / 3
+        Grain.amp.hold = true
     }
     
     func getSourceNode() -> AVAudioSourceNode? {
@@ -136,6 +142,8 @@ struct GrainSource {
             return result
         }
 
-        return sample * amplitude
+        Grain.amp.step()
+
+        return sample * (amplitude * Float(Grain.amp.level))
     }
 }
