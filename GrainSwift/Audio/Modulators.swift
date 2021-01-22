@@ -11,6 +11,7 @@ protocol Modulator {
     var level: Double { get }
     mutating func reset()
     mutating func step()
+    var hold: Bool { get set }
 }
 
 protocol Envelope: Modulator {
@@ -25,6 +26,11 @@ enum EnvelopeStage {
 }
 
 struct ASREnvelope: Envelope {
+    var hold: Bool = false {
+        willSet {
+            level = newValue ? 1.0 : 0.0
+        }
+    }
 
     public var attackTime = 0.0
     public var releaseTime = 0.0
@@ -45,6 +51,7 @@ struct ASREnvelope: Envelope {
     }
     
     mutating func step() {
+        guard !hold else { return }
         
         if stage == .attack {
             level = attackTime > 0 ? min(offset / attackTime, 1) : 1
