@@ -26,16 +26,13 @@ enum EnvelopeStage {
 
 struct ASREnvelope: Envelope {
 
-    public var attackTime: UInt32 = 0
-    public var releaseTime: UInt32 = 0
+    public var attackTime = 0.0
+    public var releaseTime = 0.0
     
-    var offset: UInt32 = 0
-    var stage = EnvelopeStage.decay
+    var offset = 0.0
     var level = 0.0
-
-    init () {
-        level = 0
-    }
+    
+    var stage = EnvelopeStage.decay
     
     mutating func reset() {
         offset = 0
@@ -50,13 +47,13 @@ struct ASREnvelope: Envelope {
     mutating func step() {
         
         if stage == .attack {
-            level = min(Double(offset) / Double(attackTime), 1)
+            level = attackTime > 0 ? min(offset / attackTime, 1) : 1
             
             if offset >= attackTime {
                 stage = .sustain
             }
         } else if stage == .release && level > 0.0 {
-            level = Double(offset) / Double(releaseTime)
+            level = releaseTime > 0 ? min(offset / releaseTime, 1) : 1
         }
         
         offset += 1
