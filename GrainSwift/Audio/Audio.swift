@@ -21,7 +21,7 @@ class Audio: ObservableObject {
     
     init() {
         // bubble nested Observable changes
-        grainControlCancellable = grainControl.objectWillChange.sink { (_) in
+        grainControlCancellable = grainControl.objectWillChange.sink {
             self.objectWillChange.send()
         }
 
