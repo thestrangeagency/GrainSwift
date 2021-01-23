@@ -11,6 +11,46 @@ final class GrainControl : ObservableObject {
     let maxSize = 44100.0
     let maxJitter:UInt32 = 11025
     
+    let maxAttackTime = 44100.0 * 2
+    let maxDecayTime = 44100.0 * 2
+    
+    var ampAttackTime: Double {
+        get {
+            return Grain.amp.attackTime / maxAttackTime
+        }
+        set {
+            Grain.amp.attackTime = newValue * maxAttackTime
+            objectWillChange.send()
+        }
+    }
+    
+    var ampDecayTime: Double {
+        get {
+            return Grain.amp.releaseTime / maxDecayTime
+        }
+        set {
+            Grain.amp.releaseTime = newValue * maxDecayTime
+            objectWillChange.send()
+        }
+    }
+    
+    var ampHold: Bool {
+        get {
+            return Grain.amp.hold
+        }
+        set {
+            Grain.amp.hold = newValue
+        }
+    }
+    
+    func ampReset() {
+        Grain.amp.reset()
+    }
+    
+    func ampRelease() {
+        Grain.amp.release()
+    }
+
     var density: Double {
         get {
             return Grain.density
