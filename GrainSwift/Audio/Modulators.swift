@@ -60,7 +60,7 @@ struct ASREnvelope: Envelope {
                 stage = .sustain
             }
         } else if stage == .release && level > 0.0 {
-            level = releaseTime > 0 ? min(offset / releaseTime, 1) : 1
+            level = releaseTime > 0 ? min((releaseTime - offset) / releaseTime, 1) : 1
         }
         
         offset += 1
