@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var audio: Audio
+    @State var touching = false
     
     var body: some View {
         VStack {
@@ -18,16 +19,17 @@ struct ContentView: View {
             }
             
             if let buffer = audio.source?.audioBuffer {
-                var touching = false
                 GeometryReader { geometry in
                     WaveView(buffer: buffer, position: audio.grainControl.position)
                         .gesture(
                             DragGesture(minimumDistance: 0, coordinateSpace: .local)
                                 .onChanged { value in
                                     if audio.grainControl.ampHold {
+                                        print("a")
                                         audio.grainControl.ampHold = false
                                     }
                                     if !touching {
+                                        print("b")
                                         touching = true
                                         audio.grainControl.ampReset()
                                     }
