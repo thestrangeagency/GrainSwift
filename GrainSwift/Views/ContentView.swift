@@ -25,11 +25,9 @@ struct ContentView: View {
                             DragGesture(minimumDistance: 0, coordinateSpace: .local)
                                 .onChanged { value in
                                     if audio.grainControl.ampHold {
-                                        print("a")
                                         audio.grainControl.ampHold = false
                                     }
                                     if !touching {
-                                        print("b")
                                         touching = true
                                         audio.grainControl.ampReset()
                                     }
