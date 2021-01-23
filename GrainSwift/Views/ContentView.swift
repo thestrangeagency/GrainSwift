@@ -18,15 +18,23 @@ struct ContentView: View {
             }
             
             if let buffer = audio.source?.audioBuffer {
+                var touching = false
                 GeometryReader { geometry in
                     WaveView(buffer: buffer, position: audio.grainControl.position)
                         .gesture(
                             DragGesture(minimumDistance: 0, coordinateSpace: .local)
                                 .onChanged { value in
-                                    print(value)
-                                    audio.grainControl.position = Double(value.location.x / geometry.size.width) 
+                                    if audio.grainControl.ampHold {
+                                        audio.grainControl.ampHold = false
+                                    }
+                                    if !touching {
+                                        touching = true
+                                        audio.grainControl.ampReset()
+                                    }
+                                    audio.grainControl.position = Double(value.location.x / geometry.size.width)
                                 }
                                 .onEnded { _ in
+                                    touching = false
                                     audio.grainControl.ampRelease()
                                 }
                         )
