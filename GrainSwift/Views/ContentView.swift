@@ -52,7 +52,11 @@ struct ContentView: View {
             ControlSliderView(name: "ramp", value: $audio.grainControl.ramp)
             
             ControlTwinSliderView(name: "size", valueOne: $audio.grainControl.size, valueTwo: $audio.grainControl.sizeJitter)
-            ControlTwinSliderView(name: "position", valueOne: $audio.grainControl.position, valueTwo: $audio.grainControl.positionJitter)
+            ControlTwinSliderView(name: "position", valueOne: $audio.grainControl.position, valueTwo: $audio.grainControl.positionJitter, onDrag: {
+                if !touching {
+                    audio.grainControl.ampHold = true
+                }
+            } )
         }
     }
 }
@@ -60,12 +64,16 @@ struct ContentView: View {
 struct ControlSliderView: View {
     let name: String
     @Binding var value: Double
+    var onDrag: (() -> Void)?
     
     var body: some View {
         VStack {
             Text("\(name): \(value)")
             
             Slider(value: $value, in: 0...1, step: 0.001)
+                .onChange(of: value) { _ in
+                    onDrag?()
+                }
                 .padding()
         }
     }
@@ -75,6 +83,7 @@ struct ControlTwinSliderView: View {
     let name: String
     @Binding var valueOne: Double
     @Binding var valueTwo: Double
+    var onDrag: (() -> Void)?
     
     var body: some View {
         VStack {
@@ -82,8 +91,14 @@ struct ControlTwinSliderView: View {
             
             HStack {
                 Slider(value: $valueOne, in: 0...1, step: 0.001)
+                    .onChange(of: valueOne) { _ in
+                        onDrag?()
+                    }
                     .padding()
                 Slider(value: $valueTwo, in: 0...1, step: 0.001)
+                    .onChange(of: valueTwo) { _ in
+                        onDrag?()
+                    }
                     .padding()
             }
         }
