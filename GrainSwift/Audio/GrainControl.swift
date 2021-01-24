@@ -100,7 +100,8 @@ final class GrainControl : ObservableObject {
             return Double(Grain.indexJitter) / Double(maxJitter)
         }
         set {
-            Grain.indexJitter = clamp(UInt32(newValue * Double(maxJitter)), minValue: 0, maxValue: maxJitter)
+            let newValueClamped = clamp(newValue, minValue: 0, maxValue: 1)
+            Grain.indexJitter = UInt32(newValueClamped * Double(maxJitter))
             objectWillChange.send()
         }
     }
