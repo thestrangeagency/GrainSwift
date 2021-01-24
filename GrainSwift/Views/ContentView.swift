@@ -42,7 +42,7 @@ struct ContentView: View {
                 }
             } )
             
-            ControlTwinSliderView(name: "amp envelope", valueOne: $audio.grainControl.ampAttackTime, valueTwo: $audio.grainControl.ampDecayTime)
+            ControlTwinSliderView(name: "amp envelope", valueOne: $audio.grainControl.ampAttackTime, valueTwo: $audio.grainControl.ampReleaseTime)
                 .opacity(audio.grainControl.ampHold ? 0.5 : 1.0)
         }
     }

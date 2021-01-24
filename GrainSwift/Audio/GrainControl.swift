@@ -12,7 +12,7 @@ final class GrainControl : ObservableObject {
     let maxJitter:UInt32 = 11025
     
     let maxAttackTime = 44100.0 * 2
-    let maxDecayTime = 44100.0 * 2
+    let maxReleaseTime = 44100.0 * 2
     
     var ampAttackTime: Double {
         get {
@@ -24,12 +24,12 @@ final class GrainControl : ObservableObject {
         }
     }
     
-    var ampDecayTime: Double {
+    var ampReleaseTime: Double {
         get {
-            return Grain.amp.releaseTime / maxDecayTime
+            return Grain.amp.releaseTime / maxReleaseTime
         }
         set {
-            Grain.amp.releaseTime = newValue * maxDecayTime
+            Grain.amp.releaseTime = newValue * maxReleaseTime
             objectWillChange.send()
         }
     }
