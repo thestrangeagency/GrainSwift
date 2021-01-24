@@ -38,7 +38,7 @@ struct PositionControlView: View {
                                 audio.grainControl.ampRelease()
                             }
                     )
-                    .foregroundColor(Color(white: 1.0, opacity: 0.5))
+                    .foregroundColor(Color(white: 1.0, opacity: 0.0001)) // clear view ignores touches
             }
         }
     }
