@@ -18,7 +18,9 @@ struct PositionControlView: View {
                     let x = geometry.size.width * CGFloat(audio.grainControl.position)
                     path.move(to: CGPoint(x: x, y: 0))
                     path.addLine(to: CGPoint(x: x, y:geometry.size.height))
-                }.stroke(Color.red, lineWidth: 1)
+                }
+                .stroke(Color.red, lineWidth: 1 + CGFloat(audio.grainControl.positionJitter * 8.0))
+                .blur(radius: CGFloat(audio.grainControl.positionJitter * 10.0))
 
                 Rectangle()
                     .gesture(
@@ -32,6 +34,7 @@ struct PositionControlView: View {
                                     audio.grainControl.ampReset()
                                 }
                                 audio.grainControl.position = Double(value.location.x / geometry.size.width)
+                                audio.grainControl.positionJitter = 1.0 - Double(value.location.y / geometry.size.height)
                             }
                             .onEnded { _ in
                                 touching = false
