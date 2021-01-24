@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var audio: Audio
-    @State var touching = false
+    @State var isTouchingPosition = false
     
     var body: some View {
         VStack {
@@ -19,25 +19,9 @@ struct ContentView: View {
             }
             
             if let buffer = audio.source?.audioBuffer {
-                GeometryReader { geometry in
-                    WaveView(buffer: buffer, position: audio.grainControl.position)
-                        .gesture(
-                            DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                .onChanged { value in
-                                    if audio.grainControl.ampHold {
-                                        audio.grainControl.ampHold = false
-                                    }
-                                    if !touching {
-                                        touching = true
-                                        audio.grainControl.ampReset()
-                                    }
-                                    audio.grainControl.position = Double(value.location.x / geometry.size.width)
-                                }
-                                .onEnded { _ in
-                                    touching = false
-                                    audio.grainControl.ampRelease()
-                                }
-                        )
+                ZStack {
+                    WaveView(buffer: buffer)
+                    PositionControlView(touching: $isTouchingPosition)
                 }
                 GrainView(
                     position: audio.grainControl.position,
@@ -53,7 +37,7 @@ struct ContentView: View {
             
             ControlTwinSliderView(name: "size", valueOne: $audio.grainControl.size, valueTwo: $audio.grainControl.sizeJitter)
             ControlTwinSliderView(name: "position", valueOne: $audio.grainControl.position, valueTwo: $audio.grainControl.positionJitter, onDrag: {
-                if !touching {
+                if !isTouchingPosition {
                     audio.grainControl.ampHold = true
                 }
             } )
