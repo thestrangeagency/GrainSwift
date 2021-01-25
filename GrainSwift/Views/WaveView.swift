@@ -12,17 +12,15 @@ struct WaveView: View {
     var buffer: AVAudioPCMBuffer
     var start: UInt32
     var end: UInt32
-    var position: Double
     
-    init(buffer: AVAudioPCMBuffer, start: UInt32, end: UInt32, position: Double = -1.0) {
+    init(buffer: AVAudioPCMBuffer, start: UInt32, end: UInt32) {
         self.start = start
         self.end = end
         self.buffer = buffer
-        self.position = position
     }
     
-    init(buffer: AVAudioPCMBuffer, position: Double) {
-        self.init(buffer: buffer, start: 0, end: buffer.frameLength, position: position)
+    init(buffer: AVAudioPCMBuffer) {
+        self.init(buffer: buffer, start: 0, end: buffer.frameLength)
     }
     
     var body: some View {
@@ -49,12 +47,6 @@ struct WaveView: View {
                             )
                         }
                     }.stroke(Color.blue, lineWidth: 1)
-                    
-                    Path { path in
-                        let x = geometry.size.width * CGFloat(position)
-                        path.move(to: CGPoint(x: x, y: 0))
-                        path.addLine(to: CGPoint(x: x, y:geometry.size.height))
-                    }.stroke(Color.red, lineWidth: 1)
                 }
             }
         }
@@ -63,6 +55,6 @@ struct WaveView: View {
 
 struct WaveView_Previews: PreviewProvider {
     static var previews: some View {
-        return WaveView(buffer: AVAudioPCMBuffer(), position: 0.5)
+        return WaveView(buffer: AVAudioPCMBuffer())
     }
 }

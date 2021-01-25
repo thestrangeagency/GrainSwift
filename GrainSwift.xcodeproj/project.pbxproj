@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A05272B225BD93CC002F6769 /* PositionControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05272B125BD93CC002F6769 /* PositionControlView.swift */; };
 		A05E662F25B196AA000DED49 /* GrainControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E662E25B196AA000DED49 /* GrainControl.swift */; };
+		A065A1F925B8661C003C5167 /* Modulators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065A1F825B8661C003C5167 /* Modulators.swift */; };
 		A0C4EBFC25A5B6EC00631713 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EBFB25A5B6EC00631713 /* Utils.swift */; };
 		A0C4EC0425A73A2800631713 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EC0325A73A2800631713 /* WaveView.swift */; };
 		A0C4EC0C25A83CA100631713 /* GrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EC0B25A83CA100631713 /* GrainView.swift */; };
@@ -39,7 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A05272B125BD93CC002F6769 /* PositionControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionControlView.swift; sourceTree = "<group>"; };
 		A05E662E25B196AA000DED49 /* GrainControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainControl.swift; sourceTree = "<group>"; };
+		A065A1F825B8661C003C5167 /* Modulators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modulators.swift; sourceTree = "<group>"; };
 		A0C4EBFB25A5B6EC00631713 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A0C4EC0325A73A2800631713 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		A0C4EC0B25A83CA100631713 /* GrainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainView.swift; sourceTree = "<group>"; };
@@ -82,12 +86,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A065A20725BAE945003C5167 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				A0EFAD1425A0712600D11E03 /* Audio.swift */,
+				A0EFACFD25A05C7000D11E03 /* AudioSource.swift */,
+				A0EFAD2125A1C1A500D11E03 /* GrainSource.swift */,
+				A05E662E25B196AA000DED49 /* GrainControl.swift */,
+				A065A1F825B8661C003C5167 /* Modulators.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		A0C4EC1025A83CB200631713 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				A0EFACC3259F4D1A00D11E03 /* ContentView.swift */,
 				A0C4EC0B25A83CA100631713 /* GrainView.swift */,
 				A0C4EC0325A73A2800631713 /* WaveView.swift */,
+				A05272B125BD93CC002F6769 /* PositionControlView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -114,12 +131,9 @@
 		A0EFACC0259F4D1A00D11E03 /* GrainSwift */ = {
 			isa = PBXGroup;
 			children = (
-				A0C4EC1025A83CB200631713 /* Views */,
-				A0EFAD1425A0712600D11E03 /* Audio.swift */,
-				A0EFACFD25A05C7000D11E03 /* AudioSource.swift */,
-				A0EFAD2125A1C1A500D11E03 /* GrainSource.swift */,
-				A05E662E25B196AA000DED49 /* GrainControl.swift */,
 				A0EFACC1259F4D1A00D11E03 /* GrainSwiftApp.swift */,
+				A065A20725BAE945003C5167 /* Audio */,
+				A0C4EC1025A83CB200631713 /* Views */,
 				A0C4EBFB25A5B6EC00631713 /* Utils.swift */,
 				A0EFACC5259F4D2300D11E03 /* Assets.xcassets */,
 				A0EFACCA259F4D2300D11E03 /* Info.plist */,
@@ -277,8 +291,10 @@
 				A0EFAD1525A0712600D11E03 /* Audio.swift in Sources */,
 				A0EFACC4259F4D1A00D11E03 /* ContentView.swift in Sources */,
 				A0C4EC0425A73A2800631713 /* WaveView.swift in Sources */,
+				A05272B225BD93CC002F6769 /* PositionControlView.swift in Sources */,
 				A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */,
 				A0EFAD2225A1C1A500D11E03 /* GrainSource.swift in Sources */,
+				A065A1F925B8661C003C5167 /* Modulators.swift in Sources */,
 				A05E662F25B196AA000DED49 /* GrainControl.swift in Sources */,
 				A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */,
 				A0C4EC0C25A83CA100631713 /* GrainView.swift in Sources */,
