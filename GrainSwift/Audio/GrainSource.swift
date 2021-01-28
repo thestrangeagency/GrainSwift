@@ -56,12 +56,8 @@ struct Grain {
         let grainIndex:Int = Int((index + offset) % Self.bufferLength)
         var sample = SIMD2<Float>(0.0, 0.0)
         
-        if delay > 0 {
-            
-            // delay phase for grain variation returns silence
-            delay = delay - 1
-        
-        } else {
+        // delay phase for grain variation returns silence
+        if delay <= offset {
             // populate sample from source buffer
             sample.x = data[0][grainIndex]
             sample.y = data[max(0, Self.bufferMaxChannel)][grainIndex]
