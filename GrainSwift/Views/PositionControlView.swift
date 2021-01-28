@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PositionControlView: View {
     @EnvironmentObject var audio: Audio
-    @Binding var touching:Bool
+    @Binding var touching: Bool
     
     var body: some View {
         GeometryReader { geometry in
