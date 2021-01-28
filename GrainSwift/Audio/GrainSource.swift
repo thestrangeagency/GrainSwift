@@ -121,9 +121,10 @@ struct GrainSource {
     func sample() -> SIMD2<Float> {
         
         // spawn a new grain if count is below density
-        if Double(Grain.grainCount) < Grain.density * Double(Grain.grains.count) {
+        let targetCount = Int(Grain.density * Double(Grain.grains.count))
+        if Grain.grainCount < targetCount {
             Grain.grainCount += 1
-        } else {
+        } else if Grain.grainCount > targetCount {
             Grain.grainCount = max(Grain.grainCount - 1, 0)
         }
         
