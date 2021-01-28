@@ -9,7 +9,7 @@ import AVFoundation
 
 final class GrainControl : ObservableObject {
     let maxSize = 44100.0
-    let maxJitter:UInt32 = 11025
+    let maxJitter = 11025.0
     
     let maxAttackTime = 44100.0 * 2
     let maxReleaseTime = 44100.0 * 2
@@ -79,7 +79,8 @@ final class GrainControl : ObservableObject {
             return Double(Grain.lengthJitter) / Double(maxJitter)
         }
         set {
-            Grain.lengthJitter = clamp(UInt32(newValue * Double(maxJitter)), minValue: 0, maxValue: maxJitter)
+            let newValueClamped = clamp(newValue, minValue: 0, maxValue: 1)
+            Grain.lengthJitter = AVAudioFrameCount(newValueClamped * maxJitter)
             objectWillChange.send()
         }
     }
@@ -111,9 +112,8 @@ final class GrainControl : ObservableObject {
             return Double(Grain.delay) / maxSize
         }
         set {
-            let newSize: AVAudioFrameCount = AVAudioFrameCount(newValue * maxSize)
-            let maxSizeClamped = min(AVAudioFrameCount(maxSize), Grain.bufferLength)
-            Grain.delay = clamp(newSize, minValue: 441, maxValue: maxSizeClamped)
+            let newValueClamped = clamp(newValue, minValue: 0, maxValue: 1)
+            Grain.delay = AVAudioFrameCount(newValueClamped * maxSize)
             objectWillChange.send()
         }
     }
@@ -123,7 +123,8 @@ final class GrainControl : ObservableObject {
             return Double(Grain.delayJitter) / Double(maxJitter)
         }
         set {
-            Grain.delayJitter = clamp(UInt32(newValue * Double(maxJitter)), minValue: 0, maxValue: maxJitter)
+            let newValueClamped = clamp(newValue, minValue: 0, maxValue: 1)
+            Grain.delayJitter = AVAudioFrameCount(newValueClamped * maxJitter)
             objectWillChange.send()
         }
     }
