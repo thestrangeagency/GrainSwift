@@ -25,6 +25,7 @@ I wanted to explore Swift in the context of audio and see how much I could get a
 1. [Part 5](http://the.strange.agency/blog/open-grain-05/)
 1. [Part 6](http://the.strange.agency/blog/open-grain-06/)
 1. [Part 7](http://the.strange.agency/blog/open-grain-07/)
+1. [Part 8](http://the.strange.agency/blog/open-grain-08/)
 
 ## How to load your own sounds
 
