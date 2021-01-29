@@ -44,6 +44,8 @@ struct ContentView: View {
             
             ControlTwinSliderView(name: "amp envelope", valueOne: $audio.grainControl.ampAttackTime, valueTwo: $audio.grainControl.ampReleaseTime)
                 .opacity(audio.grainControl.ampHold ? 0.5 : 1.0)
+            
+            ControlTwinSliderView(name: "pitch", valueOne: $audio.grainControl.pitch, valueTwo: $audio.grainControl.pitchJitter)
         }
     }
 }
@@ -56,6 +58,7 @@ struct ControlSliderView: View {
     var body: some View {
         VStack {
             Text("\(name): \(value)")
+                .font(.system(size: 10))
             
             Slider(value: $value, in: 0...1, step: 0.001)
                 .onChange(of: value) { _ in
@@ -73,8 +76,9 @@ struct ControlTwinSliderView: View {
     var onDrag: (() -> Void)?
     
     var body: some View {
-        VStack {
+        VStack(spacing: -8) {
             Text("\(name): \(valueOne) | \(valueTwo)")
+                .font(.system(size: 10))
             
             HStack {
                 Slider(value: $valueOne, in: 0...1, step: 0.001)

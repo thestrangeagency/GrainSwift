@@ -147,6 +147,28 @@ final class GrainControl : ObservableObject {
         }
     }
     
+    var pitch: Double {
+        get {
+            return Grain.pitch / 2.0
+        }
+        set {
+            let newValueClamped = clamp(newValue, minValue: 0, maxValue: 1)
+            Grain.pitch = newValueClamped * 2
+            objectWillChange.send()
+        }
+    }
+    
+    var pitchJitter: Double {
+        get {
+            return Grain.pitchJitter * 2.0
+        }
+        set {
+            let newValueClamped = clamp(newValue, minValue: 0, maxValue: 1)
+            Grain.pitchJitter = newValueClamped / 2
+            objectWillChange.send()
+        }
+    }
+    
     init() {
     }
 }

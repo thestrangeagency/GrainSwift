@@ -22,10 +22,12 @@ struct Grain {
     static var length: AVAudioFrameCount = 0        // length of the grains
     static var delay: AVAudioFrameCount = 0         // delay between grains
     static var ramp: AVAudioFrameCount = 0          // length of attack and decay
+    static var pitch: Double = 1.0                  // playback speed
     
     static var lengthJitter:UInt32 = 0              // add randomness to parameters
     static var indexJitter:UInt32 = 0
     static var delayJitter:UInt32 = 0
+    static var pitchJitter:Double = 0.0
     
     static var grainCount = 0   // number of grains playing
     static var density = 0.1    // fraction of total count that should be playing
@@ -33,11 +35,12 @@ struct Grain {
     static var amp = ASREnvelope()
     
     // per grain state
-    var offset:UInt32 = 0   // current grain position relative to position in source buffer
+    var smoothOffset = 0.0  // current grain position relative to position in source buffer
     var length:UInt32 = 0   // length of the grain
     var index:UInt32 = 0    // position in source buffer
     var delay:UInt32 = 0    // delay between loops
     var ramp:UInt32 = 0     // length of attack and decay
+    var pitch:Double = 1.0  // playback speed
     
     mutating func sample() -> SIMD2<Float> {
 
@@ -45,12 +48,16 @@ struct Grain {
             return SIMD2<Float>(0.0, 0.0)
         }
         
+        // quantize offset to nearest integer
+        let offset = UInt32(smoothOffset)
+        
         // update with global parameters at start or loop
         if offset == 0 {
             length = Self.length + UInt32.random(in: 0...Self.lengthJitter)
             index = Self.bufferIndex + UInt32.random(in: 0...Self.indexJitter)
             delay = Self.delay + UInt32.random(in: 0...Self.delayJitter)
             ramp = Self.ramp
+            pitch = Self.pitch + Double.random(in: -Self.pitchJitter...Self.pitchJitter)
         }
         
         let grainIndex:Int = Int((index + offset) % Self.bufferLength)
@@ -78,7 +85,8 @@ struct Grain {
             }
         }
         
-        offset = (offset + 1) % (length + delay)
+        smoothOffset = (smoothOffset + pitch).truncatingRemainder(dividingBy: Double(length + delay))
+        smoothOffset = max(smoothOffset, 0) // let's keep things positive
 
         return sample
     }
