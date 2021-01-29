@@ -31,6 +31,11 @@ struct ContentView: View {
                     ramp: audio.grainControl.ramp)
             }
             
+            HStack {
+                XYControlView()
+                XYControlView()
+            }
+            
             ControlSliderView(name: "density", value: $audio.grainControl.density)
             ControlTwinSliderView(name: "spread", valueOne: $audio.grainControl.spread, valueTwo: $audio.grainControl.spreadJitter)
             ControlSliderView(name: "ramp", value: $audio.grainControl.ramp)
