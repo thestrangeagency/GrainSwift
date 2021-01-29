@@ -16,32 +16,35 @@ struct XYControlView: View {
         GeometryReader { geometry in
             ZStack {
                 
+                // background
                 Rectangle()
                     .foregroundColor(.yellow)
                 
+                // calculate cursor position
                 let cursorSize: CGFloat = min(geometry.size.width, geometry.size.height) * 0.1
                 let width = geometry.size.width - cursorSize
                 let height = geometry.size.height - cursorSize
+                let xPos = cursorSize * 0.5 + CGFloat(x) * width
+                let yPos = cursorSize * 0.5 + CGFloat(y) * height
                 
+                // cursor
                 Rectangle()
                     .frame(width: cursorSize, height: cursorSize, alignment: .center)
-                    .position(
-                        x: cursorSize * 0.5 + CGFloat(x) * width,
-                        y: cursorSize * 0.5 + CGFloat(y) * height)
+                    .position(x: xPos, y: yPos)
                 
+                // blur width horizontally
                 ForEach(0..<10) { i in
                     let yFactor: CGFloat = 4.0 * CGFloat(i) * (1.0 - CGFloat(y))
                     Rectangle()
                         .frame(width: cursorSize + yFactor, height: cursorSize, alignment: .center)
-                        .position(
-                            x: cursorSize * 0.5 + CGFloat(x) * width,
-                            y: cursorSize * 0.5 + CGFloat(y) * height)
+                        .position(x: xPos, y: yPos)
                         .foregroundColor(Color(red: 0, green: 0, blue: 0, opacity: 0.1))
                 }.clipped()
 
                 Text(label)
                     .foregroundColor(.black)
                 
+                // touch control
                 Rectangle()
                     .inset(by: cursorSize / 2.0)
                     .gesture(
