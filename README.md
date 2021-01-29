@@ -18,14 +18,15 @@ I wanted to explore Swift in the context of audio and see how much I could get a
 
 ## How we got here
 
-1. [Part 1](http://the.strange.agency/blog/open-grain-01/)
-1. [Part 2](http://the.strange.agency/blog/open-grain-02/)
-1. [Part 3](http://the.strange.agency/blog/open-grain-03/)
-1. [Part 4](http://the.strange.agency/blog/open-grain-04/)
-1. [Part 5](http://the.strange.agency/blog/open-grain-05/)
-1. [Part 6](http://the.strange.agency/blog/open-grain-06/)
-1. [Part 7](http://the.strange.agency/blog/open-grain-07/)
-1. [Part 8](http://the.strange.agency/blog/open-grain-08/)
+1. [Part 1: Intro](http://the.strange.agency/blog/open-grain-01/)
+1. [Part 2: Loading Audio](http://the.strange.agency/blog/open-grain-02/)
+1. [Part 3: Making it Grain](http://the.strange.agency/blog/open-grain-03/)
+1. [Part 4: Control](http://the.strange.agency/blog/open-grain-04/)
+1. [Part 5: Sharing Sounds](http://the.strange.agency/blog/open-grain-05/)
+1. [Part 6: Jitter](http://the.strange.agency/blog/open-grain-06/)
+1. [Part 7: Mixing Sounds](http://the.strange.agency/blog/open-grain-07/)
+1. [Part 8: More Touchy](http://the.strange.agency/blog/open-grain-08/)
+1. [Part 9: Pitch Control](http://the.strange.agency/blog/open-grain-09/)
 
 ## How to load your own sounds
 
