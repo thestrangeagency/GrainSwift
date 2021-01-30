@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct XYControlView: View {
-    @State var x = 0.5
-    @State var y = 0.5
-    @State var label = "Density"
+    var label = ""
+    @Binding var x: Double
+    @Binding var y: Double
+    var onDrag: (() -> Void)?
     
     var body: some View {
         
         VStack {
+            let color = Color(red: 1 - x, green: y, blue: 1, opacity: 0.2)
+            
             GeometryReader { geometry in
                 ZStack {
-                    
                     // background
                     Rectangle()
-                        .foregroundColor(Color(red: 1 - x, green: y, blue: 1, opacity: 0.2))
+                        .foregroundColor(color)
                     
                     // calculate cursor position
                     let cursorSize: CGFloat = min(geometry.size.width, geometry.size.height) * 0.1
@@ -34,14 +36,12 @@ struct XYControlView: View {
                         .frame(width: cursorSize, height: cursorSize, alignment: .center)
                         .position(x: xPos, y: yPos)
                     
-                    // blur width horizontally
-                    ForEach(0..<10) { i in
-                        let yFactor: CGFloat = 4.0 * CGFloat(i) * (1.0 - CGFloat(y))
-                        Rectangle()
-                            .frame(width: cursorSize + yFactor, height: cursorSize, alignment: .center)
-                            .position(x: xPos, y: yPos)
-                            .foregroundColor(Color(red: 0, green: 0, blue: 0, opacity: 0.1))
-                    }.clipped()
+                    // jitter
+                    let yFactor: CGFloat = 24.0 * (1.0 - CGFloat(y))
+                    Rectangle()
+                        .frame(width: cursorSize + yFactor, height: 1, alignment: .center)
+                        .position(x: xPos, y: yPos)
+                        .clipped()
                     
                     // touch control
                     Rectangle()
@@ -53,6 +53,7 @@ struct XYControlView: View {
                                     y = Double(value.location.y / geometry.size.height)
                                     x = clamp(x, minValue: 0, maxValue: 1.0)
                                     y = clamp(y, minValue: 0, maxValue: 1.0)
+                                    onDrag?()
                                 }
                                 .onEnded { _ in
                                 }
@@ -65,15 +66,17 @@ struct XYControlView: View {
             .font(.system(size: 10, design: .monospaced))
             .padding(8)
             .foregroundColor(.black)
-            .background(Color(red: 1 - x, green: y, blue: 1, opacity: 0.2))
+            .background(color)
             .cornerRadius(40)
         }
     }
 }
 
 struct XYControlView_Previews: PreviewProvider {
+    @State static var x = 0.5
+    @State static var y = 0.5
     static var previews: some View {
-        XYControlView()
+        XYControlView(label: "density", x: $x, y: $y)
             .frame(width: 120.0, height: 80.0)
     }
 }
