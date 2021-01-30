@@ -16,11 +16,29 @@ struct PositionControlView: View {
             ZStack {
                 Path { path in
                     let x = geometry.size.width * CGFloat(audio.grainControl.position)
+                    
+                    let sizeFraction = Double(Grain.length) / Double(Grain.bufferLength)
+                    let sizeSpan = geometry.size.width * CGFloat(sizeFraction)
+                    
+                    let jitterFraction = audio.grainControl.maxJitter / Double(Grain.bufferLength)
+                    let jitterSpan = geometry.size.width * CGFloat(audio.grainControl.positionJitter * jitterFraction) * 0.5
+                    
                     path.move(to: CGPoint(x: x, y: 0))
-                    path.addLine(to: CGPoint(x: x, y:geometry.size.height))
+                    path.addLine(to: CGPoint(x: x, y: geometry.size.height))
+                    
+                    path.move(to: CGPoint(x: x + sizeSpan, y: 0))
+                    path.addLine(to: CGPoint(x: x + sizeSpan, y: geometry.size.height))
+                    
+                    let jitterTop = geometry.size.height * 0.4
+                    let jitterBottom = geometry.size.height * 0.6
+                    
+                    path.move(to: CGPoint(x: x - jitterSpan, y: jitterTop))
+                    path.addLine(to: CGPoint(x: x - jitterSpan, y: jitterBottom))
+                    
+                    path.move(to: CGPoint(x: x + sizeSpan + jitterSpan, y: jitterTop))
+                    path.addLine(to: CGPoint(x: x + sizeSpan + jitterSpan, y: jitterBottom))
                 }
-                .stroke(Style.foreground, lineWidth: 1 + CGFloat(audio.grainControl.positionJitter * 8.0))
-                .blur(radius: CGFloat(audio.grainControl.positionJitter * 10.0))
+                .stroke(Style.foreground, lineWidth: 1)
 
                 Rectangle()
                     .gesture(
