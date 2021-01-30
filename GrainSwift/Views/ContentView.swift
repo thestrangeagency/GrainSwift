@@ -43,11 +43,15 @@ struct ContentView: View {
             
             HStack {
                 XYControlView(label: "spread", x: $audio.grainControl.spread, y: $audio.grainControl.spreadJitter)
-                XYControlView(label: "position", x: $audio.grainControl.position, y: $audio.grainControl.positionJitter, onDrag: {
-                    if !isTouchingPosition {
-                        audio.grainControl.ampHold = true
-                    }
-                } )
+                XYControlView(
+                    label: "position",
+                    x: $audio.grainControl.position,
+                    y: $audio.grainControl.positionJitter,
+                    onDrag: {
+                        if !isTouchingPosition {
+                            audio.grainControl.ampHold = true
+                        }
+                    })
             }
             
             HStack {
