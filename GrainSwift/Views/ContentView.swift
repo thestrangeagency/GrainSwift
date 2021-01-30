@@ -38,12 +38,6 @@ struct ContentView: View {
             }
             
             HStack {
-                XYControlView(label: "size", x: $audio.grainControl.size, y: $audio.grainControl.sizeJitter)
-                XYControlView(label: "pitch", x: $audio.grainControl.pitch, y: $audio.grainControl.pitchJitter)
-            }
-            
-            HStack {
-                XYControlView(label: "spread", x: $audio.grainControl.spread, y: $audio.grainControl.spreadJitter)
                 XYControlView(
                     label: "position",
                     x: $audio.grainControl.position,
@@ -53,6 +47,12 @@ struct ContentView: View {
                             audio.grainControl.ampHold = true
                         }
                     })
+                XYControlView(label: "size", x: $audio.grainControl.size, y: $audio.grainControl.sizeJitter)
+            }
+            
+            HStack {
+                XYControlView(label: "spread", x: $audio.grainControl.spread, y: $audio.grainControl.spreadJitter)
+                XYControlView(label: "pitch", x: $audio.grainControl.pitch, y: $audio.grainControl.pitchJitter)
             }
             
             HStack {
