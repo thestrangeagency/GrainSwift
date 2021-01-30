@@ -28,7 +28,8 @@ struct ContentView: View {
                     size: audio.grainControl.size,
                     positionJitter: audio.grainControl.positionJitter,
                     sizeJitter: audio.grainControl.sizeJitter,
-                    ramp: audio.grainControl.ramp)
+                    ramp: audio.grainControl.ramp,
+                    spread: audio.grainControl.spread)
             }
             
             HStack {
