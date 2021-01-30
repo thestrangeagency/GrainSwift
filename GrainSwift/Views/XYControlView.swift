@@ -13,6 +13,20 @@ struct XYControlView: View {
     @Binding var y: Double
     var onDrag: (() -> Void)?
     
+    init(label: String, x: Binding<Double>, onDrag: (() -> Void)? = nil) {
+        self.label = label
+        _x = x
+        _y = .constant(0.5)
+        self.onDrag = onDrag
+    }
+    
+    init(label: String, x: Binding<Double>, y: Binding<Double>, onDrag: (() -> Void)? = nil) {
+        self.label = label
+        _x = x
+        _y = y
+        self.onDrag = onDrag
+    }
+    
     var body: some View {
         
         VStack {
