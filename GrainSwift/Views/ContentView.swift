@@ -59,7 +59,7 @@ struct ContentView: View {
                 XYControlView(label: "attack", x: $audio.grainControl.ampAttackTime)
                 XYControlView(label: "release", x: $audio.grainControl.ampReleaseTime)
             }
-            .opacity(audio.grainControl.ampHold ? 0.5 : 1.0)
+            .disabled(audio.grainControl.ampHold)
             
             
         }

@@ -24,4 +24,6 @@ struct Style {
             return Self.colorFor(x: 1, y: 1)
         }
     }
+    
+    static var disabled: Color = Color(white: 0.25, opacity: 0.25)
 }

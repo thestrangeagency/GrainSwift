@@ -13,6 +13,7 @@ struct XYControlView: View {
     @Binding var y: Double
     var hasY: Bool = true
     var onDrag: (() -> Void)?
+    @Environment(\.isEnabled) private var isEnabled
     
     init(label: String, x: Binding<Double>, onDrag: (() -> Void)? = nil) {
         self.label = label
@@ -32,7 +33,7 @@ struct XYControlView: View {
     var body: some View {
         
         VStack {
-            let color = Style.colorFor(x: x, y: y)
+            let color = isEnabled ? Style.colorFor(x: x, y: y) : Style.disabled
             
             GeometryReader { geometry in
                 ZStack {
