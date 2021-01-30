@@ -21,7 +21,7 @@ struct PositionControlView: View {
                     let sizeSpan = geometry.size.width * CGFloat(sizeFraction)
                     
                     let jitterFraction = audio.grainControl.maxJitter / Double(Grain.bufferLength)
-                    let jitterSpan = geometry.size.width * CGFloat(audio.grainControl.positionJitter * jitterFraction) * 0.5
+                    let jitterSpan = geometry.size.width * CGFloat((audio.grainControl.positionJitter + audio.grainControl.sizeJitter) * jitterFraction) * 0.5
                     
                     path.move(to: CGPoint(x: x, y: 0))
                     path.addLine(to: CGPoint(x: x, y: geometry.size.height))
@@ -29,8 +29,8 @@ struct PositionControlView: View {
                     path.move(to: CGPoint(x: x + sizeSpan, y: 0))
                     path.addLine(to: CGPoint(x: x + sizeSpan, y: geometry.size.height))
                     
-                    let jitterTop = geometry.size.height * 0.4
-                    let jitterBottom = geometry.size.height * 0.6
+                    let jitterTop = geometry.size.height * 0.25
+                    let jitterBottom = geometry.size.height * 0.75
                     
                     path.move(to: CGPoint(x: x - jitterSpan, y: jitterTop))
                     path.addLine(to: CGPoint(x: x - jitterSpan, y: jitterBottom))
