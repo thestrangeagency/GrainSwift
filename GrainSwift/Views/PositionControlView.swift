@@ -19,7 +19,7 @@ struct PositionControlView: View {
                     path.move(to: CGPoint(x: x, y: 0))
                     path.addLine(to: CGPoint(x: x, y:geometry.size.height))
                 }
-                .stroke(Color.red, lineWidth: 1 + CGFloat(audio.grainControl.positionJitter * 8.0))
+                .stroke(Style.foreground, lineWidth: 1 + CGFloat(audio.grainControl.positionJitter * 8.0))
                 .blur(radius: CGFloat(audio.grainControl.positionJitter * 10.0))
 
                 Rectangle()

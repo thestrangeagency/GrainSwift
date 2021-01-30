@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A05272B225BD93CC002F6769 /* PositionControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05272B125BD93CC002F6769 /* PositionControlView.swift */; };
+		A052731125C42BD5002F6769 /* XYControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052731025C42BD5002F6769 /* XYControlView.swift */; };
+		A052731625C567D0002F6769 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052731525C567D0002F6769 /* Style.swift */; };
 		A05E662F25B196AA000DED49 /* GrainControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E662E25B196AA000DED49 /* GrainControl.swift */; };
 		A065A1F925B8661C003C5167 /* Modulators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065A1F825B8661C003C5167 /* Modulators.swift */; };
 		A0C4EBFC25A5B6EC00631713 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C4EBFB25A5B6EC00631713 /* Utils.swift */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		A05272B125BD93CC002F6769 /* PositionControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionControlView.swift; sourceTree = "<group>"; };
+		A052731025C42BD5002F6769 /* XYControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYControlView.swift; sourceTree = "<group>"; };
+		A052731525C567D0002F6769 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		A05E662E25B196AA000DED49 /* GrainControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrainControl.swift; sourceTree = "<group>"; };
 		A065A1F825B8661C003C5167 /* Modulators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modulators.swift; sourceTree = "<group>"; };
 		A0C4EBFB25A5B6EC00631713 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 				A0C4EC0B25A83CA100631713 /* GrainView.swift */,
 				A0C4EC0325A73A2800631713 /* WaveView.swift */,
 				A05272B125BD93CC002F6769 /* PositionControlView.swift */,
+				A052731025C42BD5002F6769 /* XYControlView.swift */,
+				A052731525C567D0002F6769 /* Style.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,12 +299,14 @@
 				A0C4EC0425A73A2800631713 /* WaveView.swift in Sources */,
 				A05272B225BD93CC002F6769 /* PositionControlView.swift in Sources */,
 				A0EFACC2259F4D1A00D11E03 /* GrainSwiftApp.swift in Sources */,
+				A052731625C567D0002F6769 /* Style.swift in Sources */,
 				A0EFAD2225A1C1A500D11E03 /* GrainSource.swift in Sources */,
 				A065A1F925B8661C003C5167 /* Modulators.swift in Sources */,
 				A05E662F25B196AA000DED49 /* GrainControl.swift in Sources */,
 				A0EFACFE25A05C7000D11E03 /* AudioSource.swift in Sources */,
 				A0C4EC0C25A83CA100631713 /* GrainView.swift in Sources */,
 				A0C4EBFC25A5B6EC00631713 /* Utils.swift in Sources */,
+				A052731125C42BD5002F6769 /* XYControlView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

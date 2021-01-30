@@ -28,24 +28,40 @@ struct ContentView: View {
                     size: audio.grainControl.size,
                     positionJitter: audio.grainControl.positionJitter,
                     sizeJitter: audio.grainControl.sizeJitter,
-                    ramp: audio.grainControl.ramp)
+                    ramp: audio.grainControl.ramp,
+                    spread: audio.grainControl.spread)
             }
             
-            ControlSliderView(name: "density", value: $audio.grainControl.density)
-            ControlTwinSliderView(name: "spread", valueOne: $audio.grainControl.spread, valueTwo: $audio.grainControl.spreadJitter)
-            ControlSliderView(name: "ramp", value: $audio.grainControl.ramp)
+            HStack {
+                XYControlView(label: "density", x: $audio.grainControl.density)
+                XYControlView(label: "ramp", x: $audio.grainControl.ramp)
+            }
             
-            ControlTwinSliderView(name: "size", valueOne: $audio.grainControl.size, valueTwo: $audio.grainControl.sizeJitter)
-            ControlTwinSliderView(name: "position", valueOne: $audio.grainControl.position, valueTwo: $audio.grainControl.positionJitter, onDrag: {
-                if !isTouchingPosition {
-                    audio.grainControl.ampHold = true
-                }
-            } )
+            HStack {
+                XYControlView(label: "size", x: $audio.grainControl.size, y: $audio.grainControl.sizeJitter)
+                XYControlView(label: "pitch", x: $audio.grainControl.pitch, y: $audio.grainControl.pitchJitter)
+            }
             
-            ControlTwinSliderView(name: "amp envelope", valueOne: $audio.grainControl.ampAttackTime, valueTwo: $audio.grainControl.ampReleaseTime)
-                .opacity(audio.grainControl.ampHold ? 0.5 : 1.0)
+            HStack {
+                XYControlView(label: "spread", x: $audio.grainControl.spread, y: $audio.grainControl.spreadJitter)
+                XYControlView(
+                    label: "position",
+                    x: $audio.grainControl.position,
+                    y: $audio.grainControl.positionJitter,
+                    onDrag: {
+                        if !isTouchingPosition {
+                            audio.grainControl.ampHold = true
+                        }
+                    })
+            }
             
-            ControlTwinSliderView(name: "pitch", valueOne: $audio.grainControl.pitch, valueTwo: $audio.grainControl.pitchJitter)
+            HStack {
+                XYControlView(label: "attack", x: $audio.grainControl.ampAttackTime)
+                XYControlView(label: "release", x: $audio.grainControl.ampReleaseTime)
+            }
+            .disabled(audio.grainControl.ampHold)
+            
+            
         }
     }
 }

@@ -46,7 +46,7 @@ struct WaveView: View {
                             path.addLine(to: CGPoint(x: x, y: y)
                             )
                         }
-                    }.stroke(Color.blue, lineWidth: 1)
+                    }.stroke(Style.background, lineWidth: 1)
                 }
             }
         }
