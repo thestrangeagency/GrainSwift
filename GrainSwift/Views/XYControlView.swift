@@ -11,12 +11,14 @@ struct XYControlView: View {
     var label = ""
     @Binding var x: Double
     @Binding var y: Double
+    var hasY: Bool = true
     var onDrag: (() -> Void)?
     
     init(label: String, x: Binding<Double>, onDrag: (() -> Void)? = nil) {
         self.label = label
         _x = x
         _y = .constant(0.5)
+        hasY = false
         self.onDrag = onDrag
     }
     
@@ -43,7 +45,7 @@ struct XYControlView: View {
                     let width = geometry.size.width - cursorSize
                     let height = geometry.size.height - cursorSize
                     let xPos = cursorSize * 0.5 + CGFloat(x) * width
-                    let yPos = cursorSize * 0.5 + CGFloat(y) * height
+                    let yPos = geometry.size.height - (cursorSize * 0.5 + CGFloat(y) * height)
                     
                     // cursor
                     Rectangle()
@@ -51,11 +53,13 @@ struct XYControlView: View {
                         .position(x: xPos, y: yPos)
                     
                     // jitter
-                    let yFactor: CGFloat = 24.0 * (1.0 - CGFloat(y))
-                    Rectangle()
-                        .frame(width: cursorSize + yFactor, height: 1, alignment: .center)
-                        .position(x: xPos, y: yPos)
-                        .clipped()
+                    if hasY {
+                        let yFactor: CGFloat = 24.0 * CGFloat(y)
+                        Rectangle()
+                            .frame(width: cursorSize + yFactor, height: 1, alignment: .center)
+                            .position(x: xPos, y: yPos)
+                            .clipped()
+                    }
                     
                     // touch control
                     Rectangle()
@@ -64,7 +68,7 @@ struct XYControlView: View {
                             DragGesture(minimumDistance: 0, coordinateSpace: .local)
                                 .onChanged { value in
                                     x = Double(value.location.x / geometry.size.width)
-                                    y = Double(value.location.y / geometry.size.height)
+                                    y = 1.0 - Double(value.location.y / geometry.size.height)
                                     x = clamp(x, minValue: 0, maxValue: 1.0)
                                     y = clamp(y, minValue: 0, maxValue: 1.0)
                                     onDrag?()
