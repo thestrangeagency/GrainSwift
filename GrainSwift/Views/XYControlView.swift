@@ -67,10 +67,8 @@ struct XYControlView: View {
                         .gesture(
                             DragGesture(minimumDistance: 0, coordinateSpace: .local)
                                 .onChanged { value in
-                                    x = Double(value.location.x / geometry.size.width)
-                                    y = 1.0 - Double(value.location.y / geometry.size.height)
-                                    x = clamp(x, minValue: 0, maxValue: 1.0)
-                                    y = clamp(y, minValue: 0, maxValue: 1.0)
+                                    x = clamp(Double(value.location.x / geometry.size.width), minValue: 0, maxValue: 1.0)
+                                    y = clamp(1.0 - Double(value.location.y / geometry.size.height), minValue: 0, maxValue: 1.0)
                                     onDrag?()
                                 }
                                 .onEnded { _ in
@@ -78,7 +76,7 @@ struct XYControlView: View {
                         )
                         .foregroundColor(Color(white: 1.0, opacity: 0.0001)) // clear view ignores touches
                 }
-            }
+            }.padding(.horizontal)
         
         Text(label)
             .font(.system(size: 10, design: .monospaced))
