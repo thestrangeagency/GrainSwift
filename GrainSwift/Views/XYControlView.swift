@@ -32,7 +32,7 @@ struct XYControlView: View {
     var body: some View {
         
         VStack {
-            let color = Color(red: 1 - x, green: y, blue: 1, opacity: 0.2)
+            let color = Style.colorFor(x: x, y: y)
             
             GeometryReader { geometry in
                 ZStack {

@@ -48,7 +48,7 @@ struct GrainView: View {
                         path.addLine(to: CGPoint(x: halfWidth * floatRamp, y:0))
                         path.addLine(to: CGPoint(x: geometry.size.width - halfWidth * floatRamp, y:0))
                         path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height))
-                    }.stroke(Color.red, lineWidth: 1)
+                    }.stroke(Style.foreground, lineWidth: 1)
                 }
             }
         }
