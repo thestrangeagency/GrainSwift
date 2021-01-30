@@ -10,12 +10,12 @@ import SwiftUI
 
 struct Style {
     static func colorFor(x: Double, y: Double) -> Color {
-        return Color(red: 1.0 - x, green: y, blue: 1.0, opacity: 0.2)
+        return Color(red: 1.0 - x, green: y, blue: 1.0, opacity: 0.5)
     }
     
     static var foreground: Color {
         get {
-            return Self.colorFor(x: 0, y: 0)
+            return Color(.black)
         }
     }
     
