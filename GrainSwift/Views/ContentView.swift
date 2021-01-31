@@ -52,7 +52,7 @@ struct ContentView: View {
                         if !isTouchingPosition {
                             audio.grainControl.ampHold = true
                         }
-                    })
+                    }).opacity(audio.grainControl.ampHold ? 1.0 : 0.1)
                 XYControlView(
                     label: "size",
                     x: $audio.grainControl.size,

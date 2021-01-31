@@ -121,7 +121,7 @@ struct XYControlView: View {
                 }
             }.padding(.horizontal)
             
-        }
+        }.opacity(isEnabled ? 1.0 : 0.1)
     }
 }
 

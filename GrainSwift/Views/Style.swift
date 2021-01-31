@@ -25,5 +25,5 @@ struct Style {
         }
     }
     
-    static var disabled: Color = Color(white: 0.25, opacity: 0.25)
+    static var disabled: Color = Color(white: 0.25, opacity: 1.0)
 }
