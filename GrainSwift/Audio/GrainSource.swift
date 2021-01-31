@@ -55,7 +55,7 @@ struct Grain {
     static var env1Delay = 0.0
     static var env1Index = 0.0
     static var env1Pitch = 0.0
-    static var env1Volume = 0.0
+    static var env1Volume = 1.0
 
     // per grain state
     var smoothOffset = 0.0  // current grain position relative to position in source buffer
