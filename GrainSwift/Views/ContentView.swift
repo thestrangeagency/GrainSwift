@@ -87,6 +87,7 @@ struct ContentView: View {
             
             HStack {
                 XYControlView(label: "lfo", x: $audio.grainControl.lfoPeriod)
+                XYControlView(label: "volume", x: $audio.grainControl.volume)
             }
         }
     }

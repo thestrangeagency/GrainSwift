@@ -223,6 +223,17 @@ final class GrainControl : ObservableObject {
         }
     }
     
+    var volume: Double {
+        get {
+            return Grain.volume
+        }
+        set {
+            let newValueClamped = clamp(newValue, minValue: 0, maxValue: 1)
+            Grain.volume = newValueClamped
+            objectWillChange.send()
+        }
+    }
+    
     init() {
     }
 }

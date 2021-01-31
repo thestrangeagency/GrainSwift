@@ -32,6 +32,8 @@ struct Grain {
     static var grainCount = 0   // number of grains playing
     static var density = 0.1    // fraction of total count that should be playing
     
+    static var volume = 1.0     // final volume multiplier
+    
     static var amp = ASREnvelope()
     static var lfo = LFO()
     
@@ -168,6 +170,6 @@ struct GrainSource {
         Grain.amp.step()
         Grain.lfo.step()
 
-        return sample * (amplitude * Float(Grain.amp.level))
+        return sample * (amplitude * Float(Grain.amp.level) * Float(Grain.volume))
     }
 }
