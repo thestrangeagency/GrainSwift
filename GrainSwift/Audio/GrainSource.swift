@@ -35,6 +35,10 @@ struct Grain {
     static var amp = ASREnvelope()
     static var lfo = LFO()
     
+    // mod matrix
+    static var lfoLength = 0.5
+    static var lfoDelay = 0.5
+    static var lfoIndex = 0.5
     static var lfoPitch = 0.5
     
     // per grain state
@@ -60,7 +64,18 @@ struct Grain {
             index = Self.bufferIndex + UInt32.random(in: 0...Self.indexJitter)
             delay = Self.delay + UInt32.random(in: 0...Self.delayJitter)
             ramp = Self.ramp
-            pitch = Self.pitch + Double.random(in: -Self.pitchJitter...Self.pitchJitter) + Self.lfoPitch * Self.lfo.level
+            pitch = Self.pitch + Double.random(in: -Self.pitchJitter...Self.pitchJitter)
+            
+            // calculate lfo influence based on mod matrix and maximally half of the relevant quantity
+            let lengthLfo = Self.lfoLength * Self.lfo.level * Double(Self.length) * 0.5
+            let indexLfo = Self.lfoIndex * Self.lfo.level * Double(Self.bufferLength) * 0.5
+            let delayLfo = Self.lfoDelay * Self.lfo.level * Double(Self.length) * 0.5
+            let pitchLfo = Self.lfoPitch * Self.lfo.level
+            
+            length = UInt32(max(1, Int(length) + Int(lengthLfo)))
+            index = UInt32(max(0, Int(index) + Int(indexLfo)))
+            delay = UInt32(max(0, Int(delay) + Int(delayLfo)))
+            pitch += pitchLfo
         }
         
         let grainIndex:Int = Int((index + offset) % Self.bufferLength)
