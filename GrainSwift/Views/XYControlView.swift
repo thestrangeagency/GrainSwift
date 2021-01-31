@@ -11,6 +11,7 @@ struct XYControlView: View {
     var label = ""
     @Binding var x: Double
     @Binding var y: Double
+    @State var z: Double = 0.0
     var hasY: Bool = true
     var onDrag: (() -> Void)?
     @Environment(\.isEnabled) private var isEnabled
@@ -78,13 +79,32 @@ struct XYControlView: View {
                         .foregroundColor(Color(white: 1.0, opacity: 0.0001)) // clear view ignores touches
                 }
             }.padding(.horizontal)
-        
-        Text(label)
-            .font(.system(size: 10, design: .monospaced))
-            .padding(8)
-            .foregroundColor(.black)
-            .background(color)
-            .cornerRadius(40)
+            
+            HStack {
+                Text(label)
+                    .font(.system(size: 10, design: .monospaced))
+                    .padding(8)
+                    .foregroundColor(.black)
+                    .background(color)
+                    .cornerRadius(20)
+                
+                let zDisplay = String(format: "%02d", Int(z * 99))
+                Text("lfo: \(zDisplay)")
+                    .font(.system(size: 10, design: .monospaced))
+                    .padding(8)
+                    .foregroundColor(.black)
+                    .background(color)
+                    .cornerRadius(20)
+                    .gesture(
+                        DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                            .onChanged { value in
+                                z = clamp(z - Double(value.translation.height) / 4000.0, minValue: 0.0, maxValue: 1.0)
+                            }
+                            .onEnded { _ in
+                            }
+                    )
+            }.padding(.horizontal)
+            
         }
     }
 }
@@ -94,6 +114,6 @@ struct XYControlView_Previews: PreviewProvider {
     @State static var y = 0.5
     static var previews: some View {
         XYControlView(label: "density", x: $x, y: $y)
-            .frame(width: 120.0, height: 80.0)
+            .frame(width: 180.0, height: 80.0)
     }
 }
