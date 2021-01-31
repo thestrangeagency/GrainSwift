@@ -21,93 +21,93 @@ final class GrainControl : ObservableObject {
     
     var ampAttackTime: Double {
         get {
-            return Grain.amp.attackTime / maxAttackTime
+            return Grain.env1.attackTime / maxAttackTime
         }
         set {
-            Grain.amp.attackTime = newValue * maxAttackTime
+            Grain.env1.attackTime = newValue * maxAttackTime
             objectWillChange.send()
         }
     }
     
     var ampReleaseTime: Double {
         get {
-            return Grain.amp.releaseTime / maxReleaseTime
+            return Grain.env1.releaseTime / maxReleaseTime
         }
         set {
-            Grain.amp.releaseTime = newValue * maxReleaseTime
+            Grain.env1.releaseTime = newValue * maxReleaseTime
             objectWillChange.send()
         }
     }
     
     var ampHold: Bool {
         get {
-            return Grain.amp.hold
+            return Grain.env1.hold
         }
         set {
-            Grain.amp.hold = newValue
+            Grain.env1.hold = newValue
         }
     }
     
     func ampReset() {
-        Grain.amp.reset()
+        Grain.env1.reset()
     }
     
     func ampRelease() {
-        Grain.amp.release()
+        Grain.env1.release()
     }
     
     // MARK: - lfo
     
     var lfoPeriod: Double {
         get {
-            return Double(Grain.lfo.period) / maxPeriod
+            return Double(Grain.lfo1.period) / maxPeriod
         }
         set {
-            Grain.lfo.period = Int(max(newValue * maxPeriod, minPeriod))
+            Grain.lfo1.period = Int(max(newValue * maxPeriod, minPeriod))
             objectWillChange.send()
         }
     }
     
     var lfoPosition: Double {
         get {
-            return Grain.lfoIndex
+            return Grain.lfo1Index
         }
         set {
-            Grain.lfoIndex = newValue
+            Grain.lfo1Index = newValue
             objectWillChange.send()
         }
     }
-
+    
     var lfoSize: Double {
         get {
-            return Grain.lfoLength
+            return Grain.lfo1Length
         }
         set {
-            Grain.lfoLength = newValue
+            Grain.lfo1Length = newValue
             objectWillChange.send()
         }
     }
-
+    
     var lfoSpread: Double {
         get {
-            return Grain.lfoDelay
+            return Grain.lfo1Delay
         }
         set {
-            Grain.lfoDelay = newValue
+            Grain.lfo1Delay = newValue
             objectWillChange.send()
         }
     }
-
+    
     var lfoPitch: Double {
         get {
-            return Grain.lfoPitch
+            return Grain.lfo1Pitch
         }
         set {
-            Grain.lfoPitch = newValue
+            Grain.lfo1Pitch = newValue
             objectWillChange.send()
         }
     }
-
+    
     // MARK: - grain
     
     var density: Double {
