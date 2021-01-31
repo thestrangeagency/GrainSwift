@@ -38,34 +38,22 @@ Some controls work in the horizontal and vertical directions. The vertical direc
 
 Some controls display an `lfo:` label. Dragging this vertically sets the amount of LFO applied to the parameter.
 
-Touching the top waveform enables the amp envelope and lets you play by tapping. To get back to continuous playback, simply touch the `position` control.
+
+control | effect
+--- | ---
+density | number of grains playing at once
+ramp | amount of smoothing applied to each grain
+position&#42; | where in the source buffer grains are coming from
+size | size of each grain
+spread | spacing between subsequent grains
+pitch | playback speed a.k.a pitch
+attack | duration of amp envelope attack portion
+release | duration of amp envelope release portion
+lfo | low frequency oscillator modulator period
+volume | overall output volume
 
 
-* density
-    * number of grains playing at once
-* ramp
-    * amount of smoothing applied to each grain
-
-* position
-    * where in the source buffer grains are coming from
-* size
-    * size of each grain
-
-* spread
-    * spacing between subsequent grains
-* pitch
-    * playback speed a.k.a pitch
-    
-* attack
-    * duration of amp envelope attack portion
-* release
-    * duration of amp envelope release portion
-
-* lfo
-    * low frequency oscillator modulator period
-* volume
-    * overall output volume
-
+\* Touching the top waveform enables the amp envelope and lets you play by tapping. To get back to continuous playback, simply touch the `position` control.
 
 
 ## Why we are here
