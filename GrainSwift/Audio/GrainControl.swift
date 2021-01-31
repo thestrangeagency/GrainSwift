@@ -17,6 +17,8 @@ final class GrainControl : ObservableObject {
     let minPeriod = 441.0
     let maxPeriod = 44100.0 * 10
     
+    static let shared = GrainControl()
+    
     var ampAttackTime: Double {
         get {
             return Grain.amp.attackTime / maxAttackTime
@@ -233,6 +235,18 @@ final class GrainControl : ObservableObject {
             objectWillChange.send()
         }
     }
+    
+    var effectivePosition: Double {
+        get {
+            return Grain.effectivePosition
+        }
+        set {
+            let newValueClamped = clamp(newValue, minValue: 0, maxValue: 1)
+            Grain.effectivePosition = newValueClamped
+            objectWillChange.send()
+        }
+    }
+    
     
     init() {
     }

@@ -15,13 +15,13 @@ class Audio: ObservableObject {
     let engine = AVAudioEngine()
     
     var grainSource: GrainSource?
-    var grainControl = GrainControl()
+    var grainControl = GrainControl.shared
     var grainControlCancellable: AnyCancellable? = nil
     var sourceNode: AVAudioSourceNode?
     
     init() {
         // bubble nested Observable changes
-        grainControlCancellable = grainControl.objectWillChange.sink {
+        grainControlCancellable = grainControl.objectWillChange.receive(on: DispatchQueue.main).sink {
             self.objectWillChange.send()
         }
 

@@ -36,6 +36,7 @@ struct Grain {
     
     static var amp = ASREnvelope()
     static var lfo = LFO()
+    static var effectivePosition: Double = 0        // position in source buffer, post LFO
     
     // mod matrix
     static var lfoLength = 0.0
@@ -112,6 +113,8 @@ struct Grain {
     }
 }
 
+var timer = 0
+
 struct GrainSource {
     
     init(withBuffer buffer:AVAudioPCMBuffer) {
@@ -127,6 +130,8 @@ struct GrainSource {
         Grain.amp.attackTime = 4410
         Grain.amp.releaseTime = 44100 / 3
         Grain.amp.hold = true
+        
+        Grain.effectivePosition = 0.5
     }
     
     func getSourceNode() -> AVAudioSourceNode? {
@@ -170,6 +175,13 @@ struct GrainSource {
         Grain.amp.step()
         Grain.lfo.step()
 
+        timer = timer + 1
+        if timer == 2025 { // 20 fps
+            let indexLfo = Grain.lfoIndex * Grain.lfo.level * Double(Grain.bufferLength) * 0.5
+            GrainControl.shared.effectivePosition = (Double(Grain.bufferIndex) + indexLfo) / Double(Grain.bufferLength)
+            timer = 0
+        }
+        
         return sample * (amplitude * Float(Grain.amp.level) * Float(Grain.volume))
     }
 }

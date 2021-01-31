@@ -15,7 +15,7 @@ struct PositionControlView: View {
         GeometryReader { geometry in
             ZStack {
                 Path { path in
-                    let x = geometry.size.width * CGFloat(audio.grainControl.position)
+                    let x = geometry.size.width * CGFloat(audio.grainControl.effectivePosition)
                     
                     let sizeFraction = Double(Grain.length) / Double(Grain.bufferLength)
                     let sizeSpan = geometry.size.width * CGFloat(sizeFraction)
