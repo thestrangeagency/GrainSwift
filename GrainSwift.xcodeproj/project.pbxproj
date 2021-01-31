@@ -110,12 +110,20 @@
 				A0EFACC3259F4D1A00D11E03 /* ContentView.swift */,
 				A0C4EC0B25A83CA100631713 /* GrainView.swift */,
 				A0C4EC0325A73A2800631713 /* WaveView.swift */,
-				A05272B125BD93CC002F6769 /* PositionControlView.swift */,
-				A052731025C42BD5002F6769 /* XYControlView.swift */,
+				A0CC377625C6F2C500D64D6B /* Controls */,
 				A052731525C567D0002F6769 /* Style.swift */,
-				A0CC377125C6F0FC00D64D6B /* LabelControlView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A0CC377625C6F2C500D64D6B /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				A0CC377125C6F0FC00D64D6B /* LabelControlView.swift */,
+				A05272B125BD93CC002F6769 /* PositionControlView.swift */,
+				A052731025C42BD5002F6769 /* XYControlView.swift */,
+			);
+			name = Controls;
 			sourceTree = "<group>";
 		};
 		A0EFACB5259F4D1A00D11E03 = {
