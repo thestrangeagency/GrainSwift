@@ -1,4 +1,4 @@
-# GrainSwift
+# Open Granular
 
 Open source granular synthesizer for iOS, written in Swift using SwiftUI.
 
