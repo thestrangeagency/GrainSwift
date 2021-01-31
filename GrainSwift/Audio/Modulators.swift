@@ -67,3 +67,23 @@ struct ASREnvelope: Envelope {
     }
 }
 
+struct LFO: Modulator {
+    var hold: Bool = false
+    
+    public var period = 22050
+    
+    var offset = 0
+    var level = 0.0
+    
+    mutating func reset() {
+        offset = 0
+    }
+        
+    mutating func step() {
+        guard !hold && period > 0 else { return }
+        
+        level = sin(2.0 * Double.pi * Double(offset) / Double(period))
+        
+        offset = (offset + 1) % period
+    }
+}

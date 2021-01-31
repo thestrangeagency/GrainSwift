@@ -33,6 +33,9 @@ struct Grain {
     static var density = 0.1    // fraction of total count that should be playing
     
     static var amp = ASREnvelope()
+    static var lfo = LFO()
+    
+    static var lfoPitch = 0.5
     
     // per grain state
     var smoothOffset = 0.0  // current grain position relative to position in source buffer
@@ -57,7 +60,7 @@ struct Grain {
             index = Self.bufferIndex + UInt32.random(in: 0...Self.indexJitter)
             delay = Self.delay + UInt32.random(in: 0...Self.delayJitter)
             ramp = Self.ramp
-            pitch = Self.pitch + Double.random(in: -Self.pitchJitter...Self.pitchJitter)
+            pitch = Self.pitch + Double.random(in: -Self.pitchJitter...Self.pitchJitter) + Self.lfoPitch * Self.lfo.level
         }
         
         let grainIndex:Int = Int((index + offset) % Self.bufferLength)
@@ -148,6 +151,7 @@ struct GrainSource {
         }
 
         Grain.amp.step()
+        Grain.lfo.step()
 
         return sample * (amplitude * Float(Grain.amp.level))
     }

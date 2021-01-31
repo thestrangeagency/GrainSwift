@@ -14,6 +14,9 @@ final class GrainControl : ObservableObject {
     let maxAttackTime = 44100.0 * 2
     let maxReleaseTime = 44100.0 * 2
     
+    let minPeriod = 441.0
+    let maxPeriod = 44100.0 * 10
+    
     var ampAttackTime: Double {
         get {
             return Grain.amp.attackTime / maxAttackTime
@@ -49,6 +52,16 @@ final class GrainControl : ObservableObject {
     
     func ampRelease() {
         Grain.amp.release()
+    }
+    
+    var lfoPeriod: Double {
+        get {
+            return Double(Grain.lfo.period) / maxPeriod
+        }
+        set {
+            Grain.lfo.period = Int(max(newValue * maxPeriod, minPeriod))
+            objectWillChange.send()
+        }
     }
 
     var density: Double {

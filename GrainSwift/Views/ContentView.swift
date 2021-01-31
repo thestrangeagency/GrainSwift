@@ -65,7 +65,9 @@ struct ContentView: View {
             }
             .disabled(audio.grainControl.ampHold)
             
-            
+            HStack {
+                XYControlView(label: "lfo", x: $audio.grainControl.lfoPeriod)
+            }
         }
     }
 }
