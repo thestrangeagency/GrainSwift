@@ -101,23 +101,7 @@ struct XYControlView: View {
                     .cornerRadius(20)
              
                 if zLabel != "" {
-                    let zColor = Style.colorFor(x: z, y: 0.0)
-                    let zDisplay = String(format: "%02d", Int(z * 99))
-                    
-                    Text("\(zLabel): \(zDisplay)")
-                        .font(.system(size: 10, design: .monospaced))
-                        .padding(8)
-                        .foregroundColor(.black)
-                        .background(zColor)
-                        .cornerRadius(20)
-                        .gesture(
-                            DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                .onChanged { value in
-                                    z = clamp(z - Double(value.translation.height) / 4000.0, minValue: 0.0, maxValue: 1.0)
-                                }
-                                .onEnded { _ in
-                                }
-                        )
+                    LabelControlView(label: zLabel, value: $z)
                 }
             }.padding(.horizontal)
             
