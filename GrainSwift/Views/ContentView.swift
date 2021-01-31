@@ -21,7 +21,7 @@ struct ContentView: View {
             if let buffer = audio.source?.audioBuffer {
                 ZStack {
                     WaveView(buffer: buffer)
-                        .background(Style.colorFor(x: 0.15, y: audio.grainControl.ampHold ? 0.15 : 0.0))
+                        .background(Style.colorFor(x: 0.15, y: audio.grainControl.env1Hold ? 0.15 : 0.0))
                     PositionControlView(touching: $isTouchingPosition)
                 }
                 
@@ -50,9 +50,9 @@ struct ContentView: View {
                     z: $audio.grainControl.env1Position,
                     onDrag: {
                         if !isTouchingPosition {
-                            audio.grainControl.ampHold = true
+                            audio.grainControl.env1Hold = true
                         }
-                    }).opacity(audio.grainControl.ampHold ? 1.0 : 0.1)
+                    }).opacity(audio.grainControl.env1Hold ? 1.0 : 0.1)
                 XYControlView(
                     label: "size",
                     x: $audio.grainControl.size,
@@ -91,10 +91,10 @@ struct ContentView: View {
             }
             
             HStack {
-                XYControlView(label: "attack", x: $audio.grainControl.ampAttackTime)
-                XYControlView(label: "release", x: $audio.grainControl.ampReleaseTime)
+                XYControlView(label: "attack", x: $audio.grainControl.env1AttackTime)
+                XYControlView(label: "release", x: $audio.grainControl.env1ReleaseTime)
             }
-            .disabled(audio.grainControl.ampHold)
+            .disabled(audio.grainControl.env1Hold)
             
             HStack {
                 XYControlView(label: "lfo 1", x: $audio.grainControl.lfo1Period)

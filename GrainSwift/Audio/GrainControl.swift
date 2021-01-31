@@ -19,7 +19,7 @@ final class GrainControl : ObservableObject {
     
     // MARK: - envelope
     
-    var ampAttackTime: Double {
+    var env1AttackTime: Double {
         get {
             return Grain.env1.attackTime / maxAttackTime
         }
@@ -29,7 +29,7 @@ final class GrainControl : ObservableObject {
         }
     }
     
-    var ampReleaseTime: Double {
+    var env1ReleaseTime: Double {
         get {
             return Grain.env1.releaseTime / maxReleaseTime
         }
@@ -39,7 +39,7 @@ final class GrainControl : ObservableObject {
         }
     }
     
-    var ampHold: Bool {
+    var env1Hold: Bool {
         get {
             return Grain.env1.hold
         }
@@ -48,11 +48,11 @@ final class GrainControl : ObservableObject {
         }
     }
     
-    func ampReset() {
+    func env1Reset() {
         Grain.env1.reset()
     }
     
-    func ampRelease() {
+    func env1Release() {
         Grain.env1.release()
     }
     
