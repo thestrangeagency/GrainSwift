@@ -63,6 +63,46 @@ final class GrainControl : ObservableObject {
             objectWillChange.send()
         }
     }
+    
+    var lfoPosition: Double {
+        get {
+            return Grain.lfoIndex
+        }
+        set {
+            Grain.lfoIndex = newValue
+            objectWillChange.send()
+        }
+    }
+
+    var lfoSize: Double {
+        get {
+            return Grain.lfoLength
+        }
+        set {
+            Grain.lfoLength = newValue
+            objectWillChange.send()
+        }
+    }
+
+    var lfoSpread: Double {
+        get {
+            return Grain.lfoDelay
+        }
+        set {
+            Grain.lfoDelay = newValue
+            objectWillChange.send()
+        }
+    }
+
+    var lfoPitch: Double {
+        get {
+            return Grain.lfoPitch
+        }
+        set {
+            Grain.lfoPitch = newValue
+            objectWillChange.send()
+        }
+    }
 
     var density: Double {
         get {

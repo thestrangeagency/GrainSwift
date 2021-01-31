@@ -36,10 +36,10 @@ struct Grain {
     static var lfo = LFO()
     
     // mod matrix
-    static var lfoLength = 0.5
-    static var lfoDelay = 0.5
-    static var lfoIndex = 0.5
-    static var lfoPitch = 0.5
+    static var lfoLength = 0.0
+    static var lfoDelay = 0.0
+    static var lfoIndex = 0.0
+    static var lfoPitch = 0.0
     
     // per grain state
     var smoothOffset = 0.0  // current grain position relative to position in source buffer

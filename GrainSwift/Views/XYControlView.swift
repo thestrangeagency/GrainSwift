@@ -9,9 +9,10 @@ import SwiftUI
 
 struct XYControlView: View {
     var label = ""
+    var zLabel = ""
     @Binding var x: Double
     @Binding var y: Double
-    @State var z: Double = 0.0
+    @Binding var z: Double
     var hasY: Bool = true
     var onDrag: (() -> Void)?
     @Environment(\.isEnabled) private var isEnabled
@@ -20,6 +21,7 @@ struct XYControlView: View {
         self.label = label
         _x = x
         _y = .constant(0.5)
+        _z = .constant(0.5)
         hasY = false
         self.onDrag = onDrag
     }
@@ -28,6 +30,16 @@ struct XYControlView: View {
         self.label = label
         _x = x
         _y = y
+        _z = .constant(0.5)
+        self.onDrag = onDrag
+    }
+    
+    init(label: String, x: Binding<Double>, y: Binding<Double>, zLabel: String, z: Binding<Double>, onDrag: (() -> Void)? = nil) {
+        self.label = label
+        self.zLabel = zLabel
+        _x = x
+        _y = y
+        _z = z
         self.onDrag = onDrag
     }
     
@@ -87,22 +99,26 @@ struct XYControlView: View {
                     .foregroundColor(.black)
                     .background(color)
                     .cornerRadius(20)
-                
-                let zDisplay = String(format: "%02d", Int(z * 99))
-                Text("lfo: \(zDisplay)")
-                    .font(.system(size: 10, design: .monospaced))
-                    .padding(8)
-                    .foregroundColor(.black)
-                    .background(color)
-                    .cornerRadius(20)
-                    .gesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                            .onChanged { value in
-                                z = clamp(z - Double(value.translation.height) / 4000.0, minValue: 0.0, maxValue: 1.0)
-                            }
-                            .onEnded { _ in
-                            }
-                    )
+             
+                if zLabel != "" {
+                    let zColor = Style.colorFor(x: z, y: 0.0)
+                    let zDisplay = String(format: "%02d", Int(z * 99))
+                    
+                    Text("\(zLabel): \(zDisplay)")
+                        .font(.system(size: 10, design: .monospaced))
+                        .padding(8)
+                        .foregroundColor(.black)
+                        .background(zColor)
+                        .cornerRadius(20)
+                        .gesture(
+                            DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                .onChanged { value in
+                                    z = clamp(z - Double(value.translation.height) / 4000.0, minValue: 0.0, maxValue: 1.0)
+                                }
+                                .onEnded { _ in
+                                }
+                        )
+                }
             }.padding(.horizontal)
             
         }

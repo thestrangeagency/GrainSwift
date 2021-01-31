@@ -46,17 +46,37 @@ struct ContentView: View {
                     label: "position",
                     x: $audio.grainControl.position,
                     y: $audio.grainControl.positionJitter,
+                    zLabel: "lfo",
+                    z: $audio.grainControl.lfoPosition,
                     onDrag: {
                         if !isTouchingPosition {
                             audio.grainControl.ampHold = true
                         }
                     })
-                XYControlView(label: "size", x: $audio.grainControl.size, y: $audio.grainControl.sizeJitter)
+                XYControlView(
+                    label: "size",
+                    x: $audio.grainControl.size,
+                    y: $audio.grainControl.sizeJitter,
+                    zLabel: "lfo",
+                    z: $audio.grainControl.lfoSize
+                )
             }
             
             HStack {
-                XYControlView(label: "spread", x: $audio.grainControl.spread, y: $audio.grainControl.spreadJitter)
-                XYControlView(label: "pitch", x: $audio.grainControl.pitch, y: $audio.grainControl.pitchJitter)
+                XYControlView(
+                    label: "spread",
+                    x: $audio.grainControl.spread,
+                    y: $audio.grainControl.spreadJitter,
+                    zLabel: "lfo",
+                    z: $audio.grainControl.lfoSpread
+                )
+                XYControlView(
+                    label: "pitch",
+                    x: $audio.grainControl.pitch,
+                    y: $audio.grainControl.pitchJitter,
+                    zLabel: "lfo",
+                    z: $audio.grainControl.lfoPitch
+                )
             }
             
             HStack {
