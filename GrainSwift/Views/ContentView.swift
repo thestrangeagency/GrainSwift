@@ -46,8 +46,8 @@ struct ContentView: View {
                     label: "position",
                     x: $audio.grainControl.position,
                     y: $audio.grainControl.positionJitter,
-                    zLabel: "lfo",
-                    z: $audio.grainControl.lfoPosition,
+                    zLabel: "env",
+                    z: $audio.grainControl.env1Position,
                     onDrag: {
                         if !isTouchingPosition {
                             audio.grainControl.ampHold = true
@@ -57,9 +57,20 @@ struct ContentView: View {
                     label: "size",
                     x: $audio.grainControl.size,
                     y: $audio.grainControl.sizeJitter,
-                    zLabel: "lfo",
-                    z: $audio.grainControl.lfoSize
+                    zLabel: "env",
+                    z: $audio.grainControl.env1Size
                 )
+            }
+            
+            HStack {
+                HStack {
+                    LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Position)
+                    LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Position)
+                }.padding(.horizontal)
+                HStack {
+                    LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Position)
+                    LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Position)
+                }.padding(.horizontal)
             }
             
             HStack {
@@ -68,14 +79,14 @@ struct ContentView: View {
                     x: $audio.grainControl.spread,
                     y: $audio.grainControl.spreadJitter,
                     zLabel: "lfo",
-                    z: $audio.grainControl.lfoSpread
+                    z: $audio.grainControl.lfo1Spread
                 )
                 XYControlView(
                     label: "pitch",
                     x: $audio.grainControl.pitch,
                     y: $audio.grainControl.pitchJitter,
                     zLabel: "lfo",
-                    z: $audio.grainControl.lfoPitch
+                    z: $audio.grainControl.lfo1Pitch
                 )
             }
             
@@ -86,7 +97,7 @@ struct ContentView: View {
             .disabled(audio.grainControl.ampHold)
             
             HStack {
-                XYControlView(label: "lfo", x: $audio.grainControl.lfoPeriod)
+                XYControlView(label: "lfo 1", x: $audio.grainControl.lfo1Period)
                 XYControlView(label: "volume", x: $audio.grainControl.volume)
             }
         }

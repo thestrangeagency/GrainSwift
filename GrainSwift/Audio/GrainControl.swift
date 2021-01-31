@@ -56,9 +56,51 @@ final class GrainControl : ObservableObject {
         Grain.env1.release()
     }
     
-    // MARK: - lfo
+    // MARK: - env1
     
-    var lfoPeriod: Double {
+    var env1Position: Double {
+        get {
+            return Grain.env1Index
+        }
+        set {
+            Grain.env1Index = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var env1Size: Double {
+        get {
+            return Grain.env1Length
+        }
+        set {
+            Grain.env1Length = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var env1Spread: Double {
+        get {
+            return Grain.env1Delay
+        }
+        set {
+            Grain.env1Delay = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var env1Pitch: Double {
+        get {
+            return Grain.env1Pitch
+        }
+        set {
+            Grain.env1Pitch = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    // MARK: - lfo1
+    
+    var lfo1Period: Double {
         get {
             return Double(Grain.lfo1.period) / maxPeriod
         }
@@ -68,7 +110,7 @@ final class GrainControl : ObservableObject {
         }
     }
     
-    var lfoPosition: Double {
+    var lfo1Position: Double {
         get {
             return Grain.lfo1Index
         }
@@ -78,7 +120,7 @@ final class GrainControl : ObservableObject {
         }
     }
     
-    var lfoSize: Double {
+    var lfo1Size: Double {
         get {
             return Grain.lfo1Length
         }
@@ -88,7 +130,7 @@ final class GrainControl : ObservableObject {
         }
     }
     
-    var lfoSpread: Double {
+    var lfo1Spread: Double {
         get {
             return Grain.lfo1Delay
         }
@@ -98,7 +140,7 @@ final class GrainControl : ObservableObject {
         }
     }
     
-    var lfoPitch: Double {
+    var lfo1Pitch: Double {
         get {
             return Grain.lfo1Pitch
         }
@@ -108,6 +150,58 @@ final class GrainControl : ObservableObject {
         }
     }
     
+    // MARK: - lfo2
+    
+    var lfo2Period: Double {
+        get {
+            return Double(Grain.lfo2.period) / maxPeriod
+        }
+        set {
+            Grain.lfo2.period = Int(max(newValue * maxPeriod, minPeriod))
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo2Position: Double {
+        get {
+            return Grain.lfo2Index
+        }
+        set {
+            Grain.lfo2Index = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo2Size: Double {
+        get {
+            return Grain.lfo2Length
+        }
+        set {
+            Grain.lfo2Length = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo2Spread: Double {
+        get {
+            return Grain.lfo2Delay
+        }
+        set {
+            Grain.lfo2Delay = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo2Pitch: Double {
+        get {
+            return Grain.lfo2Pitch
+        }
+        set {
+            Grain.lfo2Pitch = newValue
+            objectWillChange.send()
+        }
+    }
+
     // MARK: - grain
     
     var density: Double {

@@ -198,6 +198,7 @@ struct GrainSource {
         Grain.lfo1.step()
         Grain.lfo2.step()
         
-        return sample * (amplitude * Float(Grain.env1.level * Grain.env1Volume) * Float(Grain.volume))
+        let volume: Float = Float(Grain.volume - Grain.env1Volume * (1.0 - Grain.env1.level))
+        return sample * (amplitude * volume)
     }
 }
