@@ -41,9 +41,9 @@ Some controls display an `lfo:` label. Dragging this vertically sets the amount 
 
 control | effect
 --- | ---
-density | number of grains playing at once
+density<sup>1</sup> | number of grains playing at once
 ramp | amount of smoothing applied to each grain
-position&#42; | where in the source buffer grains are coming from
+position<sup>2</sup> | where in the source buffer grains are coming from
 size | size of each grain
 spread | spacing between subsequent grains
 pitch | playback speed a.k.a pitch
@@ -53,7 +53,8 @@ lfo | low frequency oscillator modulator period
 volume | overall output volume
 
 
-\* Touching the top waveform enables the amp envelope and lets you play by tapping. To get back to continuous playback, simply touch the `position` control.
+1. The number of grains playable at once depends on your device's CPU. Too many grains will result in crunch or silence on slower devices.
+2. Touching the top waveform enables the amp envelope and lets you play by tapping. To get back to continuous playback, simply touch the `position` control.
 
 
 ## Why we are here
