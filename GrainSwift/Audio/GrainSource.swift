@@ -154,7 +154,7 @@ struct GrainSource {
         Grain.env1.releaseTime = 44100 / 3
         Grain.env1.hold = true
         
-        Grain.lfo2.period = Grain.lfo2.period * 4 // just to be different
+        Grain.lfo2.period = Grain.lfo1.period * 4 // just to be different
     }
     
     func getSourceNode() -> AVAudioSourceNode? {
