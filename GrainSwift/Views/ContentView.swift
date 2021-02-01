@@ -35,7 +35,7 @@ struct ContentView: View {
                     ramp: audio.grainControl.ramp,
                     spread: audio.grainControl.spread)
                     .background(Style.colorFor(x: audio.grainControl.ramp, y: 1.0 - audio.grainControl.density))
-                    .frame(height: shortHeight)
+                    .frame(height: shortHeight * 0.666)
             }
             
             // position and size
