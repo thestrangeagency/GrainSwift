@@ -90,7 +90,7 @@ struct XYControlView: View {
                         )
                         .foregroundColor(Color(white: 1.0, opacity: 0.0001)) // clear view ignores touches
                 }
-            }.padding(.horizontal)
+            }
             
             HStack {
                 Text(label)
@@ -103,7 +103,7 @@ struct XYControlView: View {
                 if zLabel != "" {
                     LabelControlView(label: zLabel, value: $z)
                 }
-            }.padding(.horizontal)
+            }
             
         }.opacity(isEnabled ? 1.0 : 0.1)
     }

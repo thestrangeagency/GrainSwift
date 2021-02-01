@@ -63,11 +63,11 @@ struct ContentView: View {
                 HStack {
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Position)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Position)
-                }.padding(.horizontal)
+                }
                 HStack {
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Spread)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Spread)
-                }.padding(.horizontal)
+                }
             }
             
             // spread and pitch
@@ -93,11 +93,11 @@ struct ContentView: View {
                 HStack {
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Spread)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Spread)
-                }.padding(.horizontal)
+                }
                 HStack {
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Pitch)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Pitch)
-                }.padding(.horizontal)
+                }
             }
             
             HStack {
