@@ -1,0 +1,1 @@
+sips --cropToHeightWidth 1798 912 --cropOffset 81 0 Meta\ Assets/iPhone.png
