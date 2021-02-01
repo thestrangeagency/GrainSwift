@@ -33,11 +33,10 @@ struct ContentView: View {
                     ramp: audio.grainControl.ramp,
                     spread: audio.grainControl.spread)
                     .background(Style.colorFor(x: 0.0, y: 0.25))
-                    .padding()
             }
             
             // position and size
-            HStack {
+            HStack(spacing: Style.margin) {
                 XYControlView(
                     label: "position",
                     x: $audio.grainControl.position,
@@ -59,7 +58,7 @@ struct ContentView: View {
             }
             
             // LFO
-            HStack {
+            HStack(spacing: Style.margin) {
                 HStack {
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Position)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Position)
@@ -71,7 +70,7 @@ struct ContentView: View {
             }
             
             // spread and pitch
-            HStack {
+            HStack(spacing: Style.margin) {
                 XYControlView(
                     label: "spread",
                     x: $audio.grainControl.spread,
@@ -89,7 +88,7 @@ struct ContentView: View {
             }
             
             // LFO
-            HStack {
+            HStack(spacing: Style.margin) {
                 HStack {
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Spread)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Spread)
@@ -100,22 +99,22 @@ struct ContentView: View {
                 }
             }
             
-            HStack {
+            HStack(spacing: Style.margin) {
                 XYControlView(label: "density", x: $audio.grainControl.density)
                 XYControlView(label: "ramp", x: $audio.grainControl.ramp)
             }
             
-            HStack {
+            HStack(spacing: Style.margin) {
                 XYControlView(label: "lfo1", x: $audio.grainControl.lfo1Period)
                 XYControlView(label: "lfo2", x: $audio.grainControl.lfo2Period)
             }
             
-            HStack {
+            HStack(spacing: Style.margin) {
                 XYControlView(label: "attack", x: $audio.grainControl.env1AttackTime).disabled(audio.grainControl.env1Hold)
                 XYControlView(label: "release", x: $audio.grainControl.env1ReleaseTime).disabled(audio.grainControl.env1Hold)
                 XYControlView(label: "volume", x: $audio.grainControl.volume)
             }
-        }
+        }.padding(.horizontal, Style.margin)
     }
 }
 
