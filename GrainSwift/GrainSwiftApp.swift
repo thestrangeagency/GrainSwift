@@ -18,6 +18,7 @@ struct GrainSwiftApp: App {
                 .onOpenURL { url in
                     audio.loadFileFrom(url)
                 }
+                .statusBar(hidden: true)
         }
     }
 }
