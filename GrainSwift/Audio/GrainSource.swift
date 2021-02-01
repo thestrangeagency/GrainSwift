@@ -104,6 +104,7 @@ struct Grain {
             index = UInt32(max(0, Int(index) + Int(indexLfo1) + Int(indexLfo2) + Int(indexEnv1)))
             delay = UInt32(max(0, Int(delay) + Int(delayLfo1) + Int(delayLfo2) + Int(delayEnv1)))
             pitch += max(0, pitchLfo1 + pitchLfo2 + pitchEnv1)
+            pitch = max(pitch, 0.05)
         }
         
         let grainIndex:Int = Int((index + offset) % Self.bufferLength)
