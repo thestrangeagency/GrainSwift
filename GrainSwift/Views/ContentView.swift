@@ -18,6 +18,9 @@ struct ContentView: View {
                     .padding()
             }
             
+            // 1d controls get less height
+            let shortHeight: CGFloat = 80.0
+            
             if let buffer = audio.source?.audioBuffer {
                 ZStack {
                     WaveView(buffer: buffer)
@@ -33,6 +36,7 @@ struct ContentView: View {
                     ramp: audio.grainControl.ramp,
                     spread: audio.grainControl.spread)
                     .background(Style.colorFor(x: 0.0, y: 0.25))
+                    .frame(height: shortHeight)
             }
             
             // position and size
@@ -106,9 +110,6 @@ struct ContentView: View {
                     Spacer()
                 }
             }
-            
-            // 1d controls get less height
-            let shortHeight: CGFloat = 80.0
             
             HStack(spacing: Style.margin) {
                 XYControlView(label: "density", x: $audio.grainControl.density)

@@ -17,14 +17,14 @@ struct GrainView: View {
     
     var body: some View {
         GeometryReader { outerGeometry in
-            HStack {
+            HStack(spacing: 0) {
                 Rectangle()
                     .foregroundColor(.white)
                     .frame(width: outerGeometry.size.width * CGFloat(spread) * 0.25, height: outerGeometry.size.height)
 
                 GeometryReader { geometry in
                     ZStack {
-                        // draw wave view
+                        // wave view
                         if let buffer = Grain.buffer {
                             let start = UInt32(Double(Grain.bufferLength) * position)
                             let end = start + Grain.length
@@ -46,15 +46,32 @@ struct GrainView: View {
                                 }
                             }
                         }
-                        // draw ramp
+
+                        let halfWidth = CGFloat(geometry.size.width * 0.5)
+                        let halfHeight = CGFloat(geometry.size.height * 0.5)
+                        let floatRamp = CGFloat(ramp)
+                        
+                        // top ramp, x starts at -1 to deglitch edge rendering
                         Path { path in
-                            let halfWidth = CGFloat(geometry.size.width * 0.5)
-                            let floatRamp = CGFloat(ramp)
-                            path.move(to: CGPoint(x: 0, y: geometry.size.height))
-                            path.addLine(to: CGPoint(x: halfWidth * floatRamp, y:0))
-                            path.addLine(to: CGPoint(x: geometry.size.width - halfWidth * floatRamp, y:0))
+                            path.move(to: CGPoint(x: -1, y: 0))
+                            path.addLine(to: CGPoint(x: -1, y: halfHeight))
+                            path.addLine(to: CGPoint(x: halfWidth * floatRamp, y: 0))
+                            path.addLine(to: CGPoint(x: geometry.size.width - halfWidth * floatRamp, y: 0))
+                            path.addLine(to: CGPoint(x: geometry.size.width, y: halfHeight))
+                            path.addLine(to: CGPoint(x: geometry.size.width, y: 0))
+                            path.addLine(to: CGPoint(x: -1, y: 0))
+                        }.fill(Color.white)
+                        
+                        // bottom ramp
+                        Path { path in
+                            path.move(to: CGPoint(x: -1, y: geometry.size.height))
+                            path.addLine(to: CGPoint(x: -1, y: halfHeight))
+                            path.addLine(to: CGPoint(x: halfWidth * floatRamp, y: geometry.size.height))
+                            path.addLine(to: CGPoint(x: geometry.size.width - halfWidth * floatRamp, y: geometry.size.height))
+                            path.addLine(to: CGPoint(x: geometry.size.width, y: halfHeight))
                             path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height))
-                        }.stroke(Style.foreground, lineWidth: 1)
+                            path.addLine(to: CGPoint(x: -1, y: geometry.size.height))
+                        }.fill(Color.white)
                     }
                 }
                 
