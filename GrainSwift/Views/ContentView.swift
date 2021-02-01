@@ -24,7 +24,6 @@ struct ContentView: View {
             if let buffer = audio.source?.audioBuffer {
                 ZStack {
                     WaveView(buffer: buffer)
-                        .background(Style.colorFor(x: 0.15, y: audio.grainControl.env1Hold ? 0.15 : 0.0))
                     PositionControlView(touching: $isTouchingPosition)
                 }
                 
@@ -35,7 +34,7 @@ struct ContentView: View {
                     sizeJitter: audio.grainControl.sizeJitter,
                     ramp: audio.grainControl.ramp,
                     spread: audio.grainControl.spread)
-                    .background(Style.colorFor(x: 0.0, y: 0.25))
+                    .background(Style.colorFor(x: audio.grainControl.ramp, y: 1.0 - audio.grainControl.density))
                     .frame(height: shortHeight)
             }
             
