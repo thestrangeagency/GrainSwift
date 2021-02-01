@@ -36,11 +36,7 @@ struct ContentView: View {
                     .padding()
             }
             
-            HStack {
-                XYControlView(label: "density", x: $audio.grainControl.density)
-                XYControlView(label: "ramp", x: $audio.grainControl.ramp)
-            }
-            
+            // position and size
             HStack {
                 XYControlView(
                     label: "position",
@@ -74,6 +70,7 @@ struct ContentView: View {
                 }.padding(.horizontal)
             }
             
+            // spread and pitch
             HStack {
                 XYControlView(
                     label: "spread",
@@ -101,6 +98,11 @@ struct ContentView: View {
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Pitch)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Pitch)
                 }.padding(.horizontal)
+            }
+            
+            HStack {
+                XYControlView(label: "density", x: $audio.grainControl.density)
+                XYControlView(label: "ramp", x: $audio.grainControl.ramp)
             }
             
             HStack {
