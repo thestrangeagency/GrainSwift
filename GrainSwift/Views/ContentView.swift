@@ -99,21 +99,28 @@ struct ContentView: View {
                 }
             }
             
+            // 1d controls get less height
+            let shortHeight: CGFloat = 80.0
+            
             HStack(spacing: Style.margin) {
                 XYControlView(label: "density", x: $audio.grainControl.density)
                 XYControlView(label: "ramp", x: $audio.grainControl.ramp)
             }
+            .frame(height: shortHeight)
             
             HStack(spacing: Style.margin) {
                 XYControlView(label: "lfo1", x: $audio.grainControl.lfo1Period)
                 XYControlView(label: "lfo2", x: $audio.grainControl.lfo2Period)
             }
+            .frame(height: shortHeight)
             
             HStack(spacing: Style.margin) {
                 XYControlView(label: "attack", x: $audio.grainControl.env1AttackTime).disabled(audio.grainControl.env1Hold)
                 XYControlView(label: "release", x: $audio.grainControl.env1ReleaseTime).disabled(audio.grainControl.env1Hold)
                 XYControlView(label: "volume", x: $audio.grainControl.volume)
             }
+            .frame(height: shortHeight)
+            
         }.padding(.horizontal, Style.margin)
     }
 }

@@ -55,7 +55,7 @@ struct XYControlView: View {
                         .foregroundColor(color)
                     
                     // calculate cursor position
-                    let cursorSize: CGFloat = min(geometry.size.width, geometry.size.height) * 0.1
+                    let cursorSize: CGFloat = 6.0
                     let width = geometry.size.width - cursorSize
                     let height = geometry.size.height - cursorSize
                     let xPos = cursorSize * 0.5 + CGFloat(x) * width
