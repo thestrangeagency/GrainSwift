@@ -57,8 +57,8 @@ struct GrainView: View {
                             path.addLine(to: CGPoint(x: -1, y: halfHeight))
                             path.addLine(to: CGPoint(x: halfWidth * floatRamp, y: 0))
                             path.addLine(to: CGPoint(x: geometry.size.width - halfWidth * floatRamp, y: 0))
-                            path.addLine(to: CGPoint(x: geometry.size.width, y: halfHeight))
-                            path.addLine(to: CGPoint(x: geometry.size.width, y: 0))
+                            path.addLine(to: CGPoint(x: geometry.size.width + 1, y: halfHeight))
+                            path.addLine(to: CGPoint(x: geometry.size.width + 1, y: 0))
                             path.addLine(to: CGPoint(x: -1, y: 0))
                         }.fill(Color.white)
                         
@@ -68,8 +68,8 @@ struct GrainView: View {
                             path.addLine(to: CGPoint(x: -1, y: halfHeight))
                             path.addLine(to: CGPoint(x: halfWidth * floatRamp, y: geometry.size.height))
                             path.addLine(to: CGPoint(x: geometry.size.width - halfWidth * floatRamp, y: geometry.size.height))
-                            path.addLine(to: CGPoint(x: geometry.size.width, y: halfHeight))
-                            path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height))
+                            path.addLine(to: CGPoint(x: geometry.size.width + 1, y: halfHeight))
+                            path.addLine(to: CGPoint(x: geometry.size.width + 1, y: geometry.size.height))
                             path.addLine(to: CGPoint(x: -1, y: geometry.size.height))
                         }.fill(Color.white)
                     }
