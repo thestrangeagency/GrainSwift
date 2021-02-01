@@ -60,12 +60,16 @@ struct ContentView: View {
             // LFO
             HStack(spacing: Style.margin) {
                 HStack {
+                    Spacer()
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Position)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Position)
+                    Spacer()
                 }
                 HStack {
+                    Spacer()
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Size)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Size)
+                    Spacer()
                 }
             }
             
@@ -90,12 +94,16 @@ struct ContentView: View {
             // LFO
             HStack(spacing: Style.margin) {
                 HStack {
+                    Spacer()
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Spread)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Spread)
+                    Spacer()
                 }
                 HStack {
+                    Spacer()
                     LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Pitch)
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Pitch)
+                    Spacer()
                 }
             }
             
