@@ -51,26 +51,32 @@ struct GrainView: View {
                         let halfHeight = CGFloat(geometry.size.height * 0.5)
                         let floatRamp = CGFloat(ramp)
                         
-                        // top ramp, x starts at -1 to deglitch edge rendering
+                        // extend by 1 to deglitch edge rendering
+                        let left: CGFloat = -1
+                        let top: CGFloat = -1
+                        let right: CGFloat = geometry.size.width + 1
+                        let bottom: CGFloat = geometry.size.height + 1
+                        
+                        // top ramp
                         Path { path in
-                            path.move(to: CGPoint(x: -1, y: 0))
-                            path.addLine(to: CGPoint(x: -1, y: halfHeight))
-                            path.addLine(to: CGPoint(x: halfWidth * floatRamp, y: 0))
-                            path.addLine(to: CGPoint(x: geometry.size.width - halfWidth * floatRamp, y: 0))
-                            path.addLine(to: CGPoint(x: geometry.size.width + 1, y: halfHeight))
-                            path.addLine(to: CGPoint(x: geometry.size.width + 1, y: 0))
-                            path.addLine(to: CGPoint(x: -1, y: 0))
+                            path.move(to: CGPoint(x: left, y: top))
+                            path.addLine(to: CGPoint(x: left, y: halfHeight))
+                            path.addLine(to: CGPoint(x: halfWidth * floatRamp, y: top))
+                            path.addLine(to: CGPoint(x: right - halfWidth * floatRamp, y: top))
+                            path.addLine(to: CGPoint(x: right, y: halfHeight))
+                            path.addLine(to: CGPoint(x: right, y: top))
+                            path.addLine(to: CGPoint(x: left, y: top))
                         }.fill(Color.white)
                         
                         // bottom ramp
                         Path { path in
-                            path.move(to: CGPoint(x: -1, y: geometry.size.height))
-                            path.addLine(to: CGPoint(x: -1, y: halfHeight))
-                            path.addLine(to: CGPoint(x: halfWidth * floatRamp, y: geometry.size.height))
-                            path.addLine(to: CGPoint(x: geometry.size.width - halfWidth * floatRamp, y: geometry.size.height))
-                            path.addLine(to: CGPoint(x: geometry.size.width + 1, y: halfHeight))
-                            path.addLine(to: CGPoint(x: geometry.size.width + 1, y: geometry.size.height))
-                            path.addLine(to: CGPoint(x: -1, y: geometry.size.height))
+                            path.move(to: CGPoint(x: left, y: bottom))
+                            path.addLine(to: CGPoint(x: left, y: halfHeight))
+                            path.addLine(to: CGPoint(x: halfWidth * floatRamp, y: bottom))
+                            path.addLine(to: CGPoint(x: right - halfWidth * floatRamp, y: bottom))
+                            path.addLine(to: CGPoint(x: right, y: halfHeight))
+                            path.addLine(to: CGPoint(x: right, y: bottom))
+                            path.addLine(to: CGPoint(x: left, y: bottom))
                         }.fill(Color.white)
                     }
                 }
