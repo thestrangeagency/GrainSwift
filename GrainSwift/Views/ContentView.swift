@@ -65,8 +65,8 @@ struct ContentView: View {
                     LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Position)
                 }
                 HStack {
-                    LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Spread)
-                    LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Spread)
+                    LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Size)
+                    LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Size)
                 }
             }
             
