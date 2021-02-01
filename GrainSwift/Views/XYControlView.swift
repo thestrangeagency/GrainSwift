@@ -55,7 +55,7 @@ struct XYControlView: View {
                         .foregroundColor(color)
                     
                     // calculate cursor position
-                    let cursorSize: CGFloat = min(geometry.size.width, geometry.size.height) * 0.1
+                    let cursorSize: CGFloat = 6.0
                     let width = geometry.size.width - cursorSize
                     let height = geometry.size.height - cursorSize
                     let xPos = cursorSize * 0.5 + CGFloat(x) * width
@@ -90,7 +90,7 @@ struct XYControlView: View {
                         )
                         .foregroundColor(Color(white: 1.0, opacity: 0.0001)) // clear view ignores touches
                 }
-            }.padding(.horizontal)
+            }
             
             HStack {
                 Text(label)
@@ -103,7 +103,7 @@ struct XYControlView: View {
                 if zLabel != "" {
                     LabelControlView(label: zLabel, value: $z)
                 }
-            }.padding(.horizontal)
+            }
             
         }.opacity(isEnabled ? 1.0 : 0.1)
     }

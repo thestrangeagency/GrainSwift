@@ -34,15 +34,29 @@ struct Grain {
     
     static var volume = 1.0     // final volume multiplier
     
-    static var amp = ASREnvelope()
-    static var lfo = LFO()
+    static var env1 = ASREnvelope()
+    static var lfo1 = LFO()
+    static var lfo2 = LFO()
     
     // mod matrix
-    static var lfoLength = 0.0
-    static var lfoDelay = 0.0
-    static var lfoIndex = 0.0
-    static var lfoPitch = 0.0
+    static var lfo1Length = 0.0
+    static var lfo1Delay = 0.0
+    static var lfo1Index = 0.0
+    static var lfo1Pitch = 0.0
+    static var lfo1Volume = 0.0
     
+    static var lfo2Length = 0.0
+    static var lfo2Delay = 0.0
+    static var lfo2Index = 0.0
+    static var lfo2Pitch = 0.0
+    static var lfo2Volume = 0.0
+    
+    static var env1Length = 0.0
+    static var env1Delay = 0.0
+    static var env1Index = 0.0
+    static var env1Pitch = 0.0
+    static var env1Volume = 1.0
+
     // per grain state
     var smoothOffset = 0.0  // current grain position relative to position in source buffer
     var length:UInt32 = 0   // length of the grain
@@ -52,7 +66,7 @@ struct Grain {
     var pitch:Double = 1.0  // playback speed
     
     mutating func sample() -> SIMD2<Float> {
-
+        
         guard let data = Self.data else {
             return SIMD2<Float>(0.0, 0.0)
         }
@@ -68,16 +82,28 @@ struct Grain {
             ramp = Self.ramp
             pitch = Self.pitch + Double.random(in: -Self.pitchJitter...Self.pitchJitter)
             
-            // calculate lfo influence based on mod matrix and maximally half of the relevant quantity
-            let lengthLfo = Self.lfoLength * Self.lfo.level * Double(Self.length) * 0.5
-            let indexLfo = Self.lfoIndex * Self.lfo.level * Double(Self.bufferLength) * 0.5
-            let delayLfo = Self.lfoDelay * Self.lfo.level * Double(Self.length) * 0.5
-            let pitchLfo = Self.lfoPitch * Self.lfo.level
+            // calculate lfo1 influence based on mod matrix and maximally half of the relevant quantity
+            let lengthLfo1 = Self.lfo1Length * Self.lfo1.level * Double(Self.length) * 0.5
+            let indexLfo1 = Self.lfo1Index * Self.lfo1.level * Double(Self.bufferLength) * 0.5
+            let delayLfo1 = Self.lfo1Delay * Self.lfo1.level * Double(Self.length) * 0.5
+            let pitchLfo1 = Self.lfo1Pitch * Self.lfo1.level
+
+            // calculate lfo2 influence
+            let lengthLfo2 = Self.lfo2Length * Self.lfo2.level * Double(Self.length) * 0.5
+            let indexLfo2 = Self.lfo2Index * Self.lfo2.level * Double(Self.bufferLength) * 0.5
+            let delayLfo2 = Self.lfo2Delay * Self.lfo2.level * Double(Self.length) * 0.5
+            let pitchLfo2 = Self.lfo2Pitch * Self.lfo2.level
             
-            length = UInt32(max(1, Int(length) + Int(lengthLfo)))
-            index = UInt32(max(0, Int(index) + Int(indexLfo)))
-            delay = UInt32(max(0, Int(delay) + Int(delayLfo)))
-            pitch += pitchLfo
+            // calculate env1 influence
+            let lengthEnv1 = Self.env1Length * Self.env1.level * Double(Self.length) * 0.5
+            let indexEnv1 = Self.env1Index * Self.env1.level * Double(Self.bufferLength) * 0.5
+            let delayEnv1 = Self.env1Delay * Self.env1.level * Double(Self.length) * 0.5
+            let pitchEnv1 = Self.env1Pitch * Self.env1.level
+
+            length = UInt32(max(1, Int(length) + Int(lengthLfo1) + Int(lengthLfo2) + Int(lengthEnv1)))
+            index = UInt32(max(0, Int(index) + Int(indexLfo1) + Int(indexLfo2) + Int(indexEnv1)))
+            delay = UInt32(max(0, Int(delay) + Int(delayLfo1) + Int(delayLfo2) + Int(delayEnv1)))
+            pitch += max(0, pitchLfo1 + pitchLfo2 + pitchEnv1)
         }
         
         let grainIndex:Int = Int((index + offset) % Self.bufferLength)
@@ -107,7 +133,7 @@ struct Grain {
         
         smoothOffset = (smoothOffset + pitch).truncatingRemainder(dividingBy: Double(length + delay))
         smoothOffset = max(smoothOffset, 0) // let's keep things positive
-
+        
         return sample
     }
 }
@@ -124,9 +150,11 @@ struct GrainSource {
         Grain.delay = 0
         Grain.ramp = Grain.length / 6
         
-        Grain.amp.attackTime = 4410
-        Grain.amp.releaseTime = 44100 / 3
-        Grain.amp.hold = true
+        Grain.env1.attackTime = 4410
+        Grain.env1.releaseTime = 44100 / 3
+        Grain.env1.hold = true
+        
+        Grain.lfo2.period = Grain.lfo1.period * 4 // just to be different
     }
     
     func getSourceNode() -> AVAudioSourceNode? {
@@ -166,10 +194,13 @@ struct GrainSource {
             }
             return result
         }
-
-        Grain.amp.step()
-        Grain.lfo.step()
-
-        return sample * (amplitude * Float(Grain.amp.level) * Float(Grain.volume))
+        
+        // advance modulators
+        Grain.env1.step()
+        Grain.lfo1.step()
+        Grain.lfo2.step()
+        
+        let volume: Float = Float(Grain.volume - Grain.env1Volume * (1.0 - Grain.env1.level))
+        return sample * (amplitude * volume)
     }
 }

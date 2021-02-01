@@ -19,91 +19,185 @@ final class GrainControl : ObservableObject {
     
     // MARK: - envelope
     
-    var ampAttackTime: Double {
+    var env1AttackTime: Double {
         get {
-            return Grain.amp.attackTime / maxAttackTime
+            return Grain.env1.attackTime / maxAttackTime
         }
         set {
-            Grain.amp.attackTime = newValue * maxAttackTime
+            Grain.env1.attackTime = newValue * maxAttackTime
             objectWillChange.send()
         }
     }
     
-    var ampReleaseTime: Double {
+    var env1ReleaseTime: Double {
         get {
-            return Grain.amp.releaseTime / maxReleaseTime
+            return Grain.env1.releaseTime / maxReleaseTime
         }
         set {
-            Grain.amp.releaseTime = newValue * maxReleaseTime
+            Grain.env1.releaseTime = newValue * maxReleaseTime
             objectWillChange.send()
         }
     }
     
-    var ampHold: Bool {
+    var env1Hold: Bool {
         get {
-            return Grain.amp.hold
+            return Grain.env1.hold
         }
         set {
-            Grain.amp.hold = newValue
+            Grain.env1.hold = newValue
         }
     }
     
-    func ampReset() {
-        Grain.amp.reset()
+    func env1Reset() {
+        Grain.env1.reset()
     }
     
-    func ampRelease() {
-        Grain.amp.release()
+    func env1Release() {
+        Grain.env1.release()
     }
     
-    // MARK: - lfo
+    // MARK: - env1
     
-    var lfoPeriod: Double {
+    var env1Position: Double {
         get {
-            return Double(Grain.lfo.period) / maxPeriod
+            return Grain.env1Index
         }
         set {
-            Grain.lfo.period = Int(max(newValue * maxPeriod, minPeriod))
+            Grain.env1Index = newValue
             objectWillChange.send()
         }
     }
     
-    var lfoPosition: Double {
+    var env1Size: Double {
         get {
-            return Grain.lfoIndex
+            return Grain.env1Length
         }
         set {
-            Grain.lfoIndex = newValue
+            Grain.env1Length = newValue
             objectWillChange.send()
         }
     }
-
-    var lfoSize: Double {
+    
+    var env1Spread: Double {
         get {
-            return Grain.lfoLength
+            return Grain.env1Delay
         }
         set {
-            Grain.lfoLength = newValue
+            Grain.env1Delay = newValue
             objectWillChange.send()
         }
     }
-
-    var lfoSpread: Double {
+    
+    var env1Pitch: Double {
         get {
-            return Grain.lfoDelay
+            return Grain.env1Pitch
         }
         set {
-            Grain.lfoDelay = newValue
+            Grain.env1Pitch = newValue
             objectWillChange.send()
         }
     }
-
-    var lfoPitch: Double {
+    
+    // MARK: - lfo1
+    
+    var lfo1Period: Double {
         get {
-            return Grain.lfoPitch
+            return Double(Grain.lfo1.period) / maxPeriod
         }
         set {
-            Grain.lfoPitch = newValue
+            Grain.lfo1.period = Int(max(newValue * maxPeriod, minPeriod))
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo1Position: Double {
+        get {
+            return Grain.lfo1Index
+        }
+        set {
+            Grain.lfo1Index = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo1Size: Double {
+        get {
+            return Grain.lfo1Length
+        }
+        set {
+            Grain.lfo1Length = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo1Spread: Double {
+        get {
+            return Grain.lfo1Delay
+        }
+        set {
+            Grain.lfo1Delay = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo1Pitch: Double {
+        get {
+            return Grain.lfo1Pitch
+        }
+        set {
+            Grain.lfo1Pitch = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    // MARK: - lfo2
+    
+    var lfo2Period: Double {
+        get {
+            return Double(Grain.lfo2.period) / maxPeriod
+        }
+        set {
+            Grain.lfo2.period = Int(max(newValue * maxPeriod, minPeriod))
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo2Position: Double {
+        get {
+            return Grain.lfo2Index
+        }
+        set {
+            Grain.lfo2Index = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo2Size: Double {
+        get {
+            return Grain.lfo2Length
+        }
+        set {
+            Grain.lfo2Length = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo2Spread: Double {
+        get {
+            return Grain.lfo2Delay
+        }
+        set {
+            Grain.lfo2Delay = newValue
+            objectWillChange.send()
+        }
+    }
+    
+    var lfo2Pitch: Double {
+        get {
+            return Grain.lfo2Pitch
+        }
+        set {
+            Grain.lfo2Pitch = newValue
             objectWillChange.send()
         }
     }

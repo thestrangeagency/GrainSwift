@@ -21,7 +21,7 @@ struct ContentView: View {
             if let buffer = audio.source?.audioBuffer {
                 ZStack {
                     WaveView(buffer: buffer)
-                        .background(Style.colorFor(x: 0.15, y: audio.grainControl.ampHold ? 0.15 : 0.0))
+                        .background(Style.colorFor(x: 0.15, y: audio.grainControl.env1Hold ? 0.15 : 0.0))
                     PositionControlView(touching: $isTouchingPosition)
                 }
                 
@@ -33,63 +33,103 @@ struct ContentView: View {
                     ramp: audio.grainControl.ramp,
                     spread: audio.grainControl.spread)
                     .background(Style.colorFor(x: 0.0, y: 0.25))
-                    .padding()
             }
             
-            HStack {
-                XYControlView(label: "density", x: $audio.grainControl.density)
-                XYControlView(label: "ramp", x: $audio.grainControl.ramp)
-            }
-            
-            HStack {
+            // position and size
+            HStack(spacing: Style.margin) {
                 XYControlView(
                     label: "position",
                     x: $audio.grainControl.position,
                     y: $audio.grainControl.positionJitter,
-                    zLabel: "lfo",
-                    z: $audio.grainControl.lfoPosition,
+                    zLabel: "env",
+                    z: $audio.grainControl.env1Position,
                     onDrag: {
                         if !isTouchingPosition {
-                            audio.grainControl.ampHold = true
+                            audio.grainControl.env1Hold = true
                         }
-                    }).opacity(audio.grainControl.ampHold ? 1.0 : 0.1)
+                    }).opacity(audio.grainControl.env1Hold ? 1.0 : 0.1)
                 XYControlView(
                     label: "size",
                     x: $audio.grainControl.size,
                     y: $audio.grainControl.sizeJitter,
-                    zLabel: "lfo",
-                    z: $audio.grainControl.lfoSize
+                    zLabel: "env",
+                    z: $audio.grainControl.env1Size
                 )
             }
             
-            HStack {
+            // LFO
+            HStack(spacing: Style.margin) {
+                HStack {
+                    Spacer()
+                    LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Position)
+                    LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Position)
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Size)
+                    LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Size)
+                    Spacer()
+                }
+            }
+            
+            // spread and pitch
+            HStack(spacing: Style.margin) {
                 XYControlView(
                     label: "spread",
                     x: $audio.grainControl.spread,
                     y: $audio.grainControl.spreadJitter,
-                    zLabel: "lfo",
-                    z: $audio.grainControl.lfoSpread
+                    zLabel: "env",
+                    z: $audio.grainControl.env1Spread
                 )
                 XYControlView(
                     label: "pitch",
                     x: $audio.grainControl.pitch,
                     y: $audio.grainControl.pitchJitter,
-                    zLabel: "lfo",
-                    z: $audio.grainControl.lfoPitch
+                    zLabel: "env",
+                    z: $audio.grainControl.env1Pitch
                 )
             }
             
-            HStack {
-                XYControlView(label: "attack", x: $audio.grainControl.ampAttackTime)
-                XYControlView(label: "release", x: $audio.grainControl.ampReleaseTime)
+            // LFO
+            HStack(spacing: Style.margin) {
+                HStack {
+                    Spacer()
+                    LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Spread)
+                    LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Spread)
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    LabelControlView(label: "lfo1", value: $audio.grainControl.lfo1Pitch)
+                    LabelControlView(label: "lfo2", value: $audio.grainControl.lfo2Pitch)
+                    Spacer()
+                }
             }
-            .disabled(audio.grainControl.ampHold)
             
-            HStack {
-                XYControlView(label: "lfo", x: $audio.grainControl.lfoPeriod)
+            // 1d controls get less height
+            let shortHeight: CGFloat = 80.0
+            
+            HStack(spacing: Style.margin) {
+                XYControlView(label: "density", x: $audio.grainControl.density)
+                XYControlView(label: "ramp", x: $audio.grainControl.ramp)
+            }
+            .frame(height: shortHeight)
+            
+            HStack(spacing: Style.margin) {
+                XYControlView(label: "lfo1", x: $audio.grainControl.lfo1Period)
+                XYControlView(label: "lfo2", x: $audio.grainControl.lfo2Period)
+            }
+            .frame(height: shortHeight)
+            
+            HStack(spacing: Style.margin) {
+                XYControlView(label: "attack", x: $audio.grainControl.env1AttackTime).disabled(audio.grainControl.env1Hold)
+                XYControlView(label: "release", x: $audio.grainControl.env1ReleaseTime).disabled(audio.grainControl.env1Hold)
                 XYControlView(label: "volume", x: $audio.grainControl.volume)
             }
-        }
+            .frame(height: shortHeight)
+            
+        }.padding(.horizontal, Style.margin)
     }
 }
 

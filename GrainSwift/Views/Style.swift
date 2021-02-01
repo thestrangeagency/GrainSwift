@@ -25,5 +25,7 @@ struct Style {
         }
     }
     
-    static var disabled: Color = Color(white: 0.25, opacity: 1.0)
+    static var disabled = Color(white: 0.25, opacity: 1.0)
+    
+    static var margin: CGFloat = 8.0
 }

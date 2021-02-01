@@ -44,19 +44,19 @@ struct PositionControlView: View {
                     .gesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .local)
                             .onChanged { value in
-                                if audio.grainControl.ampHold {
-                                    audio.grainControl.ampHold = false
+                                if audio.grainControl.env1Hold {
+                                    audio.grainControl.env1Hold = false
                                 }
                                 if !touching {
                                     touching = true
-                                    audio.grainControl.ampReset()
+                                    audio.grainControl.env1Reset()
                                 }
                                 audio.grainControl.position = Double(value.location.x / geometry.size.width)
                                 audio.grainControl.positionJitter = 1.0 - Double(value.location.y / geometry.size.height)
                             }
                             .onEnded { _ in
                                 touching = false
-                                audio.grainControl.ampRelease()
+                                audio.grainControl.env1Release()
                             }
                     )
                     .foregroundColor(Color(white: 1.0, opacity: 0.0001)) // clear view ignores touches
