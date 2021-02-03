@@ -133,52 +133,6 @@ struct ContentView: View {
     }
 }
 
-struct ControlSliderView: View {
-    let name: String
-    @Binding var value: Double
-    var onDrag: (() -> Void)?
-    
-    var body: some View {
-        VStack {
-            Text("\(name): \(value)")
-                .font(.system(size: 10))
-            
-            Slider(value: $value, in: 0...1, step: 0.001)
-                .onChange(of: value) { _ in
-                    onDrag?()
-                }
-                .padding()
-        }
-    }
-}
-
-struct ControlTwinSliderView: View {
-    let name: String
-    @Binding var valueOne: Double
-    @Binding var valueTwo: Double
-    var onDrag: (() -> Void)?
-    
-    var body: some View {
-        VStack(spacing: -8) {
-            Text("\(name): \(valueOne) | \(valueTwo)")
-                .font(.system(size: 10))
-            
-            HStack {
-                Slider(value: $valueOne, in: 0...1, step: 0.001)
-                    .onChange(of: valueOne) { _ in
-                        onDrag?()
-                    }
-                    .padding()
-                Slider(value: $valueTwo, in: 0...1, step: 0.001)
-                    .onChange(of: valueTwo) { _ in
-                        onDrag?()
-                    }
-                    .padding()
-            }
-        }
-    }
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
