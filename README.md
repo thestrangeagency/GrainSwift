@@ -36,7 +36,7 @@ For a deeper dive, have a look at [Microsound](https://www.amazon.com/Microsound
 
 Some controls work in the horizontal and vertical directions. The vertical direction adds a random jitter to the parameter.
 
-Some controls display an `lfo:` label. Dragging this vertically sets the amount of LFO applied to the parameter.
+Some controls display two `lfo:` labels. Dragging these vertically sets the amount of LFO applied to the parameter. Similarly, the `env:` label lets you add envelope modulation to the respective parameter.
 
 
 control | effect
