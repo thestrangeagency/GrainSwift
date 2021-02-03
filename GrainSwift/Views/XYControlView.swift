@@ -18,20 +18,12 @@ struct XYControlView: View {
     @Environment(\.isEnabled) private var isEnabled
     
     init(label: String, x: Binding<Double>, onDrag: (() -> Void)? = nil) {
-        self.label = label
-        _x = x
-        _y = .constant(0.5)
-        _z = .constant(0.5)
+        self.init(label: label, x: x, y: .constant(0.5), onDrag: onDrag)
         hasY = false
-        self.onDrag = onDrag
     }
     
     init(label: String, x: Binding<Double>, y: Binding<Double>, onDrag: (() -> Void)? = nil) {
-        self.label = label
-        _x = x
-        _y = y
-        _z = .constant(0.5)
-        self.onDrag = onDrag
+        self.init(label: label, x: x, y: y, zLabel: "", z: .constant(0.5), onDrag: onDrag)
     }
     
     init(label: String, x: Binding<Double>, y: Binding<Double>, zLabel: String, z: Binding<Double>, onDrag: (() -> Void)? = nil) {
